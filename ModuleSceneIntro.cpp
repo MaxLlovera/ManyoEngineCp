@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
+#include <Windows.h>
 
 ModuleSceneIntro::ModuleSceneIntro(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -68,6 +69,9 @@ update_status ModuleSceneIntro::Update(float dt)
         ImGui::Checkbox("Debug Window", &show_debug_window);
         if (ImGui::Button("Close Engine"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
             return UPDATE_STOP;
+
+        /*if (ImGui::Checkbox("FullScreen", &fullscreen))
+            App->window->SetFullscreen(fullscreen);*/
 
         if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
             counter++;
