@@ -387,6 +387,9 @@
     <ClInclude Include="glew\include\wglew.h">
       <Filter>Sources\Tools\glew</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleMenu.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -688,6 +691,9 @@
     </ClCompile>
     <ClCompile Include="MathGeoLib\src\Time\Clock.cpp">
       <Filter>Sources\Tools\MatGeoLib\src\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleMenu.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
