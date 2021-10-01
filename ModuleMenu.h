@@ -18,6 +18,7 @@ public:
 	bool show_debug_window = false;
 
 	bool show_app_main_menu_bar = false;
+	bool show_app_about = false;
 	bool about_us = false;
 
 
