@@ -20,7 +20,8 @@ public:
 	bool show_app_main_menu_bar = false;
 	bool show_app_about = false;
 	bool about_us = false;
-
+	bool resizable = false;
+	bool fullscreen = false;
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
