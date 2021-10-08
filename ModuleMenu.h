@@ -23,6 +23,7 @@ public:
 	bool show_app_main_menu_bar = false;
 	bool show_app_about = false;
 	bool about_us = false;
+	bool active = false;
 	bool resizable = false;
 	bool fullscreen = false;
 
