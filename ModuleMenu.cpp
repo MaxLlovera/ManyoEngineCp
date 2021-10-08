@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include <Windows.h>
 
+
 ModuleMenu::ModuleMenu(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -102,10 +103,6 @@ update_status ModuleMenu::Update(float dt)
         if (ImGui::IsAnyItemHovered)
             ImGui::SetTooltip("Restart to apply");
 
-
-
-
-
         //ImGui::SameLine();
         //if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
         //    counter++;
@@ -116,6 +113,31 @@ update_status ModuleMenu::Update(float dt)
 
         if (ImGui::CollapsingHeader("Application"))
         {
+            int fps = last_fps;
+            int ms = last_ms;
+            //Get frames
+            if (fps_log.size() > 100) //Max seconds to show
+            {
+                for (size_t i = 1; i < fps_log.size(); i++)
+                {
+                    fps_log[i - 1] = fps_log[i];
+                    //ms_log[i - 1] = ms_log[i];
+                }
+                fps_log[fps_log.size() - 1] = fps;
+                //ms_log[ms_log.size() - 1] = fps;
+            }
+            else
+            {
+                fps_log.push_back(fps);
+                //ms_log.push_back(fps);
+            }
+
+            char title[25];
+            sprintf_s(title, 25, "Framerate %.1f", fps_log[fps_log.size() - 1]);
+            ImGui::PlotHistogram("##framerate", &fps_log[0], fps_log.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+            /*sprintf_s(title, 25, "Milliseconds %.0.1f", ms_log[ms_log.size() - 1]);
+            ImGui::PlotHistogram("##milliseconds", &ms_log[0], ms_log.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));*/
+
 
         }
         if (ImGui::CollapsingHeader("Window"))
