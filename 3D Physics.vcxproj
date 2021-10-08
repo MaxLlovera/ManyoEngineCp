@@ -179,7 +179,6 @@
     <ClInclude Include="ModuleMenu.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="Module.h" />
-    <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleWindow.h" />
@@ -278,7 +277,6 @@
     <ClCompile Include="MathGeoLib\tests\TriangleMeshTests.cpp" />
     <ClCompile Include="MathGeoLib\tests\TriangleTests.cpp" />
     <ClCompile Include="MathGeoLib\tests\VectorTests.cpp" />
-    <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleMenu.cpp" />
