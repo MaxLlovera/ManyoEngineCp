@@ -59,7 +59,7 @@ update_status ModuleMenu::Update(float dt)
         }
         if (ImGui::BeginMenu("View"))
         {
-            ImGui::MenuItem("Main menu bar", NULL, &show_app_main_menu_bar);
+            ImGui::MenuItem("Configuration", NULL, &show_app_main_menu_bar);
             
             ImGui::EndMenu();
         }
@@ -84,7 +84,7 @@ update_status ModuleMenu::Update(float dt)
         static float f = 0.0f;
         static int counter = 0;
 
-        ImGui::Begin("Welcome to our Engine!");                          // Create a window called "Hello, world!" and append into it.
+        ImGui::Begin("Configuration");                          // Create a window called "Hello, world!" and append into it.
 
         ImGui::Text("ManyoEngineCP");               // Display some text (you can use a format strings too)
         ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
@@ -98,12 +98,7 @@ update_status ModuleMenu::Update(float dt)
             return UPDATE_STOP;
 
 
-        if (ImGui::Checkbox("FullScreen", &fullscreen)) {}
-        //App->window->SetFullscreen(fullscreen);
 
-        ImGui::SameLine();
-        if (ImGui::Checkbox("Resizable", &resizable)){}
-            //->window->SetResizable(resizable);
         if (ImGui::IsAnyItemHovered)
             ImGui::SetTooltip("Restart to apply");
 
@@ -118,6 +113,33 @@ update_status ModuleMenu::Update(float dt)
         //ImGui::Text("counter = %d", counter);
 
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+        if (ImGui::CollapsingHeader("Application"))
+        {
+
+        }
+        if (ImGui::CollapsingHeader("Window"))
+        {
+            if (ImGui::Checkbox("FullScreen", &fullscreen)) {}
+            //App->window->SetFullscreen(fullscreen);
+
+            ImGui::SameLine();
+            if (ImGui::Checkbox("Resizable", &resizable)) {}
+            //->window->SetResizable(resizable);
+        }
+        if (ImGui::CollapsingHeader("File System"))
+        {
+
+        }
+        if (ImGui::CollapsingHeader("Input"))
+        {
+
+        }
+        if (ImGui::CollapsingHeader("Hardwere"))
+        {
+
+        }
+
         ImGui::End();
                
 
