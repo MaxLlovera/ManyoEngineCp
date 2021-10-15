@@ -93,7 +93,22 @@ void ModuleWindow::SetTitle(const char* title)
 	SDL_SetWindowTitle(window, title);
 }
 
-void ModuleWindow::SetFullScreen(bool Screen)
+void ModuleWindow::SetFullScreen(bool fullScreen)
 {
-	SDL_SetWindowFullscreen(window, Screen);
+	SDL_SetWindowFullscreen(window, fullScreen);
+}
+
+void ModuleWindow::SetResizable(bool resizable)
+{
+	//SDL_SetWindow
+}
+
+void ModuleWindow::SetBrightness(float brightness)
+{
+	SDL_SetWindowBrightness(window, brightness);
+}
+
+float ModuleWindow::GetBrightness()
+{
+	return SDL_GetWindowBrightness(window);
 }

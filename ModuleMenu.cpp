@@ -145,19 +145,36 @@ update_status ModuleMenu::Update(float dt)
         }
         if (ImGui::CollapsingHeader("Window"))
         {
+			//Active
             if (ImGui::Checkbox("Active", &active)) {}
-            //App->window->SetFullscreen(fullscreen);
+
 
             ImGui::Text("Icon: *default!*");
+						
+			//Brightness
+			static float f=1;
+			f = App->window->GetBrightness();
+			if (ImGui::SliderFloat("Brightness", &f, 0.0f, 1.0f)) {}
+			App->window->SetBrightness(f);
 
-            //ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+			//Width
+			static int i2 = 0;
+			if (ImGui::SliderInt("Width", &i2, 0, 4000)) {}
 
+
+			//Height
+			static int i3 = 0;
+			if (ImGui::SliderInt("Height", &i3, 0, 2000)) {}
+
+
+			//FullScreen
             if (ImGui::Checkbox("FullScreen", &fullscreen)) {}
             App->window->SetFullScreen(fullscreen);
 
+
             ImGui::SameLine();
             if (ImGui::Checkbox("Resizable", &resizable)) {}
-            //->window->SetResizable(resizable);
+           // App->window->SetResizable(resizable);
         }
         if (ImGui::CollapsingHeader("File System"))
         {
