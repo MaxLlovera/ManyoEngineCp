@@ -153,7 +153,7 @@ update_status ModuleMenu::Update(float dt)
             //ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
 
             if (ImGui::Checkbox("FullScreen", &fullscreen)) {}
-            //App->window->SetFullscreen(fullscreen);
+            App->window->SetFullScreen(fullscreen);
 
             ImGui::SameLine();
             if (ImGui::Checkbox("Resizable", &resizable)) {}
