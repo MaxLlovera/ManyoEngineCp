@@ -23,6 +23,8 @@ public:
 	void OnResize(int width, int height);
 
 	void drawCube();
+	void drawCircle();
+	void drawTriangle();
 
 public:
 

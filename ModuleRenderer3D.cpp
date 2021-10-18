@@ -172,19 +172,19 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	//ImGui::Render();
 	//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-	////glClearColor(0.0, 0.0, 0.0, 0.0);
-	////glClear(GL_COLOR_BUFFER_BIT);
-	////glColor3f(1.0, 1.0, 1.0);
-	////glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
-	////glBegin(GL_POLYGON);
-	////glVertex3f(0.25, 0.25, 0.0);
-	////glVertex3f(0.75, 0.25, 0.0);
-	////glVertex3f(0.75, 0.75, 0.0);
-	////glVertex3f(0.25, 0.75, 0.0);
-	////glEnd();
-	////glFlush();
-	//drawCube();
+	drawCube();
+	
+	//glClearColor(0.0, 0.0, 0.0, 0.0);
+	//glClear(GL_COLOR_BUFFER_BIT);
+	//glColor3f(1.0, 1.0, 1.0);
+	//glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+	//glBegin(GL_POLYGON);
+	//glVertex3f(0.25, 0.25, 0.0);
+	//glVertex3f(0.75, 0.25, 0.0);
+	//glVertex3f(0.75, 0.75, 0.0);
+	//glVertex3f(0.25, 0.75, 0.0);
+	//glEnd();
+	//glFlush();
 	
 
 	SDL_GL_SwapWindow(App->window->window);
@@ -244,7 +244,7 @@ void ModuleRenderer3D::OnResize(int width, int height)
 }
 
 
-void drawCube()
+void ModuleRenderer3D::drawCube()
 {
 	GLfloat v0[3] = { 1.0f, 1.0f, 0.0f };
 	GLfloat v1[3] = { 0.0f, 1.0f, 0.0f };
@@ -311,4 +311,17 @@ void drawCube()
 	glVertex3fv(v7);
 
 	glEnd();
+}
+
+
+
+
+void ModuleRenderer3D::drawCircle()
+{
+
+}
+
+void ModuleRenderer3D::drawTriangle()
+{
+
 }
