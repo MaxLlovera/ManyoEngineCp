@@ -158,15 +158,13 @@ update_status ModuleMenu::Update(float dt)
 			App->window->SetBrightness(f);
 
 			//Width
-			static int i2 = 0;
+			static int i2 = 1024;
 			if (ImGui::SliderInt("Width", &i2, 0, 4000)) {}
-            App->window->SetWidth(i2);
-
-
+           
 			//Height
-			static int i3 = 0;
+			static int i3 = 800;
 			if (ImGui::SliderInt("Height", &i3, 0, 2000)) {}
-
+            App->window->SetWindowSize(i2,i3);
 
 			//FullScreen
             if (ImGui::Checkbox("FullScreen", &fullscreen)) {}

@@ -100,7 +100,8 @@ void ModuleWindow::SetFullScreen(bool fullScreen)
 
 void ModuleWindow::SetResizable(bool resizable)
 {
-	//SDL_SetWindow
+	//WIN_RESIZABLE = resizable;
+
 }
 
 void ModuleWindow::SetBrightness(float brightness)
@@ -114,7 +115,20 @@ float ModuleWindow::GetBrightness()
 }
 
 
-void ModuleWindow::SetWidth(int width)
+
+void ModuleWindow::SetWindowSize(int width, int height)
 {
-	SDL_SetWindowSize(window, width, NULL);
+	SDL_SetWindowSize(window, width, height);
+}
+
+
+int ModuleWindow::GetWidth()
+{
+	return 0;
+	
+}
+
+int ModuleWindow::GetHeight()
+{
+	return 0;
 }
