@@ -22,6 +22,7 @@ public:
 	void SetFullScreen(bool fullScreen);
 	void SetResizable(bool resizable);
 	void SetBrightness(float brightness);
+	void SetWidth(int width);
 	
 	float GetBrightness();
 

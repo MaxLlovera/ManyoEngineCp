@@ -112,3 +112,9 @@ float ModuleWindow::GetBrightness()
 {
 	return SDL_GetWindowBrightness(window);
 }
+
+
+void ModuleWindow::SetWidth(int width)
+{
+	SDL_SetWindowSize(window, width, NULL);
+}

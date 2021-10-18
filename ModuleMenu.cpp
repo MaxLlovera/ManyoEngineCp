@@ -160,6 +160,7 @@ update_status ModuleMenu::Update(float dt)
 			//Width
 			static int i2 = 0;
 			if (ImGui::SliderInt("Width", &i2, 0, 4000)) {}
+            App->window->SetWidth(i2);
 
 
 			//Height
