@@ -4,7 +4,7 @@
 #include "glew/include/glew.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl.h"
-#include "imgui/imgui_impl_opengl2.h"
+#include "imgui/imgui_impl_opengl3.h"
 #include <gl/GL.h>
 
 class ModuleSceneIntro : public Module

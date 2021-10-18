@@ -171,7 +171,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 
 	//ImGui::Render();
-	//ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+	//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 	////glClearColor(0.0, 0.0, 0.0, 0.0);
 	////glClear(GL_COLOR_BUFFER_BIT);

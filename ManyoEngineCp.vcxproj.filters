@@ -99,9 +99,6 @@
     <ClInclude Include="Imgui\imgui.h">
       <Filter>Sources\Tools\Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imgui_impl_opengl2.h">
-      <Filter>Sources\Tools\Imgui</Filter>
-    </ClInclude>
     <ClInclude Include="Imgui\imgui_impl_sdl.h">
       <Filter>Sources\Tools\Imgui</Filter>
     </ClInclude>
@@ -375,6 +372,12 @@
     <ClInclude Include="ModuleMenu.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Imgui\imgui_impl_opengl3.h">
+      <Filter>Sources\Tools\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imgui_impl_opengl3_loader.h">
+      <Filter>Sources\Tools\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -423,9 +426,6 @@
       <Filter>Sources\Tools\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_draw.cpp">
-      <Filter>Sources\Tools\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Imgui\imgui_impl_opengl2.cpp">
       <Filter>Sources\Tools\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_impl_sdl.cpp">
@@ -673,6 +673,9 @@
     </ClCompile>
     <ClCompile Include="ModuleMenu.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Imgui\imgui_impl_opengl3.cpp">
+      <Filter>Sources\Tools\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
