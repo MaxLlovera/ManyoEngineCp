@@ -157,10 +157,39 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
+update_status ModuleRenderer3D::Update(float dt)
+{
+
+	//drawCube();
+	return UPDATE_CONTINUE;
+
+}
+
+
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+
+	//ImGui::Render();
+	//ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+
+	////glClearColor(0.0, 0.0, 0.0, 0.0);
+	////glClear(GL_COLOR_BUFFER_BIT);
+	////glColor3f(1.0, 1.0, 1.0);
+	////glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+	////glBegin(GL_POLYGON);
+	////glVertex3f(0.25, 0.25, 0.0);
+	////glVertex3f(0.75, 0.25, 0.0);
+	////glVertex3f(0.75, 0.75, 0.0);
+	////glVertex3f(0.25, 0.75, 0.0);
+	////glEnd();
+	////glFlush();
+	//drawCube();
+	
+
 	SDL_GL_SwapWindow(App->window->window);
+
+
 
 	//App->level->Draw();
 	//if (debug_draw == true)
@@ -171,6 +200,20 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	//}
 	//App->editor->Draw();
 	//SDL_GL_SwapWindow(App->window->GetWindow());
+
+
+	//glClearColor(0.0, 0.0, 0.0, 0.0);
+	//glClear(GL_COLOR_BUFFER_BIT);
+	//glColor3f(1.0, 1.0, 1.0);
+	//glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+	//glBegin(GL_POLYGON);
+	//glVertex3f(0.25, 0.25, 0.0);
+	//glVertex3f(0.75, 0.25, 0.0);
+	//glVertex3f(0.75, 0.75, 0.0);
+	//glVertex3f(0.25, 0.75, 0.0);
+	//glEnd();
+	//glFlush();
+
 
 
 	return UPDATE_CONTINUE;
@@ -198,4 +241,74 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+
+void drawCube()
+{
+	GLfloat v0[3] = { 1.0f, 1.0f, 0.0f };
+	GLfloat v1[3] = { 0.0f, 1.0f, 0.0f };
+	GLfloat v2[3] = { 0.0f, 0.0f, 0.0f };
+	GLfloat v3[3] = { 1.0f, 0.0f, 0.0f };
+	GLfloat v4[3] = { 1.0f, 0.0f,-1.0f };
+	GLfloat v5[3] = { 1.0f, 1.0f,-1.0f };
+	GLfloat v6[3] = { 0.0f, 1.0f,-1.0f };
+	GLfloat v7[3] = { 0.0f, 0.0f,-1.0f };
+
+	glBegin(GL_TRIANGLES);  // draw a cube with 12 triangles
+		// front face =================
+	glVertex3fv(v0);    // v0-v1-v2
+	glVertex3fv(v1);
+	glVertex3fv(v2);
+
+	glVertex3fv(v2);    // v2-v3-v0
+	glVertex3fv(v3);
+	glVertex3fv(v0);
+
+	// right face =================
+	glVertex3fv(v0);    // v0-v3-v4
+	glVertex3fv(v3);
+	glVertex3fv(v4);
+
+	glVertex3fv(v4);    // v4-v5-v0
+	glVertex3fv(v5);
+	glVertex3fv(v0);
+
+	// top face ===================
+	glVertex3fv(v0);    // v0-v5-v6
+	glVertex3fv(v5);
+	glVertex3fv(v6);
+
+	glVertex3fv(v6);    // v6-v1-v0
+	glVertex3fv(v1);
+	glVertex3fv(v0);
+
+	// back face ===================
+	glVertex3fv(v7);
+	glVertex3fv(v6);
+	glVertex3fv(v5);
+
+	glVertex3fv(v5);
+	glVertex3fv(v4);
+	glVertex3fv(v7);
+
+	// left face ===================
+	glVertex3fv(v7);
+	glVertex3fv(v2);
+	glVertex3fv(v1);
+
+	glVertex3fv(v1);
+	glVertex3fv(v6);
+	glVertex3fv(v7);
+
+	// bottom face ===================
+	glVertex3fv(v7);
+	glVertex3fv(v4);
+	glVertex3fv(v3);
+
+	glVertex3fv(v3);
+	glVertex3fv(v2);
+	glVertex3fv(v7);
+
+	glEnd();
 }
