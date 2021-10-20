@@ -22,7 +22,9 @@ public:
 
 	void OnResize(int width, int height);
 
-	void drawCube();
+	void drawCubeDirectMode();
+	void drawCubeVertexArray();
+	void drawCubeIndex();
 	void drawCircle();
 	void drawTriangle();
 
@@ -32,4 +34,9 @@ public:
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+
+
+	int num_vertices = 36;
+	uint my_id = 0;
+
 };

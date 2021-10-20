@@ -6,6 +6,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
@@ -172,19 +173,9 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	//ImGui::Render();
 	//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	drawCube();
-	
-	//glClearColor(0.0, 0.0, 0.0, 0.0);
-	//glClear(GL_COLOR_BUFFER_BIT);
-	//glColor3f(1.0, 1.0, 1.0);
-	//glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
-	//glBegin(GL_POLYGON);
-	//glVertex3f(0.25, 0.25, 0.0);
-	//glVertex3f(0.75, 0.25, 0.0);
-	//glVertex3f(0.75, 0.75, 0.0);
-	//glVertex3f(0.25, 0.75, 0.0);
-	//glEnd();
-	//glFlush();
+	drawCubeDirectMode();
+	drawCubeVertexArray();
+	drawCubeIndex();
 	
 
 	SDL_GL_SwapWindow(App->window->window);
@@ -244,77 +235,162 @@ void ModuleRenderer3D::OnResize(int width, int height)
 }
 
 
-void ModuleRenderer3D::drawCube()
+void ModuleRenderer3D::drawCubeDirectMode()
 {
-	GLfloat v0[3] = { 1.0f, 1.0f, 0.0f };
-	GLfloat v1[3] = { 0.0f, 1.0f, 0.0f };
-	GLfloat v2[3] = { 0.0f, 0.0f, 0.0f };
-	GLfloat v3[3] = { 1.0f, 0.0f, 0.0f };
-	GLfloat v4[3] = { 1.0f, 0.0f,-1.0f };
-	GLfloat v5[3] = { 1.0f, 1.0f,-1.0f };
-	GLfloat v6[3] = { 0.0f, 1.0f,-1.0f };
-	GLfloat v7[3] = { 0.0f, 0.0f,-1.0f };
+	glBegin(GL_TRIANGLES);
+	// front faces
+	// face v0-v1-v2
+	glVertex3f(1, 1, 1);
+	glVertex3f(-1, 1, 1);
+	glVertex3f(-1, -1, 1);
+	// face v2-v3-v0
+	glVertex3f(-1, -1, 1);
+	glVertex3f(1, -1, 1);
+	glVertex3f(1, 1, 1);
 
-	glBegin(GL_TRIANGLES);  // draw a cube with 12 triangles
-		// front face =================
-	glVertex3fv(v0);    // v0-v1-v2
-	glVertex3fv(v1);
-	glVertex3fv(v2);
+	// right faces
+	// face v0-v3-v4
+	glVertex3f(1, 1, 1);
+	glVertex3f(1, -1, 1);
+	glVertex3f(1, -1, -1);
+	// face v4-v5-v0
+	glVertex3f(1, -1, -1);
+	glVertex3f(1, 1, -1);
+	glVertex3f(1, 1, 1);
 
-	glVertex3fv(v2);    // v2-v3-v0
-	glVertex3fv(v3);
-	glVertex3fv(v0);
+	// top faces
+	// face v0-v5-v6
+	glVertex3f(1, 1, 1);
+	glVertex3f(1, 1, -1);
+	glVertex3f(-1, 1, -1);
+	// face v6-v1-v0
+	glVertex3f(-1, 1, -1);
+	glVertex3f(-1, 1, 1);
+	glVertex3f(1, 1, 1);
 
-	// right face =================
-	glVertex3fv(v0);    // v0-v3-v4
-	glVertex3fv(v3);
-	glVertex3fv(v4);
+	// left faces
+	// face  v1-v6-v7
+	glVertex3f(-1, 1, 1);
+	glVertex3f(-1, 1, -1);
+	glVertex3f(-1, -1, -1);
+	// face v7-v2-v1
+	glVertex3f(-1, -1, -1);
+	glVertex3f(-1, -1, 1);
+	glVertex3f(-1, 1, 1);
 
-	glVertex3fv(v4);    // v4-v5-v0
-	glVertex3fv(v5);
-	glVertex3fv(v0);
+	// bottom faces
+	// face v7-v4-v3
+	glVertex3f(-1, -1, -1);
+	glVertex3f(1, -1, -1);
+	glVertex3f(1, -1, 1);
+	// face v3-v2-v7
+	glVertex3f(1, -1, 1);
+	glVertex3f(-1, -1, 1);
+	glVertex3f(-1, -1, -1);
 
-	// top face ===================
-	glVertex3fv(v0);    // v0-v5-v6
-	glVertex3fv(v5);
-	glVertex3fv(v6);
+	// back faces
+	// face v4-v7-v6
+	glVertex3f(1, -1, -1);
+	glVertex3f(-1, -1, -1);
+	glVertex3f(-1, 1, -1);
+	// face v6-v5-v4
+	glVertex3f(-1, 1, -1);
+	glVertex3f(1, 1, -1);
+	glVertex3f(1, -1, -1);
 
-	glVertex3fv(v6);    // v6-v1-v0
-	glVertex3fv(v1);
-	glVertex3fv(v0);
-
-	// back face ===================
-	glVertex3fv(v7);
-	glVertex3fv(v6);
-	glVertex3fv(v5);
-
-	glVertex3fv(v5);
-	glVertex3fv(v4);
-	glVertex3fv(v7);
-
-	// left face ===================
-	glVertex3fv(v7);
-	glVertex3fv(v2);
-	glVertex3fv(v1);
-
-	glVertex3fv(v1);
-	glVertex3fv(v6);
-	glVertex3fv(v7);
-
-	// bottom face ===================
-	glVertex3fv(v7);
-	glVertex3fv(v4);
-	glVertex3fv(v3);
-
-	glVertex3fv(v3);
-	glVertex3fv(v2);
-	glVertex3fv(v7);
+	
 
 	glEnd();
 }
 
 
+// array is 108 floats (36 * 3 = 108).
+GLfloat vertices[] = { 1, 1, 1,  -1, 1, 1,  -1,-1, 1,      // v0-v1-v2 (front)
+					   -1,-1, 1,   1,-1, 1,   1, 1, 1,      // v2-v3-v0
 
+						1, 1, 1,   1,-1, 1,   1,-1,-1,      // v0-v3-v4 (right)
+						1,-1,-1,   1, 1,-1,   1, 1, 1,      // v4-v5-v0
+
+						1, 1, 1,   1, 1,-1,  -1, 1,-1,      // v0-v5-v6 (top)
+					   -1, 1,-1,  -1, 1, 1,   1, 1, 1,      // v6-v1-v0
+
+					   -1, 1, 1,  -1, 1,-1,  -1,-1,-1,      // v1-v6-v7 (left)
+					   -1,-1,-1,  -1,-1, 1,  -1, 1, 1,      // v7-v2-v1
+
+					   -1,-1,-1,   1,-1,-1,   1,-1, 1,      // v7-v4-v3 (bottom)
+						1,-1, 1,  -1,-1, 1,  -1,-1,-1,      // v3-v2-v7
+
+						1,-1,-1,  -1,-1,-1,  -1, 1,-1,      // v4-v7-v6 (back)
+					   -1, 1,-1,   1, 1,-1,   1,-1,-1 };    // v6-v5-v4
+
+
+
+void ModuleRenderer3D::drawCubeVertexArray()
+{
+	
+	//glGenBuffers(1, (GLuint*)&(my_id));
+	//glBindBuffer(GL_ARRAY_BUFFER, my_id);
+
+	//glDeleteBuffers(1, (GLuint*)&(my_id));
+
+	glEnableClientState(GL_VERTEX_ARRAY); //enable vertex array
+
+	glVertexPointer(3, GL_FLOAT, 0, vertices);
+
+	glTranslatef(8, 0, 0);
+	glDrawArrays(GL_TRIANGLES, 0, num_vertices);
+
+
+	glDisableClientState(GL_VERTEX_ARRAY);  // disable vertex arrays
+
+}
+
+// vertices required to draw a cube.
+GLfloat vertices2[] = { 1, 1, 1,  -1, 1, 1,  -1,-1, 1,   1,-1, 1,   // v0,v1,v2,v3 (front)
+						1, 1, 1,   1,-1, 1,   1,-1,-1,   1, 1,-1,   // v0,v3,v4,v5 (right)
+						1, 1, 1,   1, 1,-1,  -1, 1,-1,  -1, 1, 1,   // v0,v5,v6,v1 (top)
+					   -1, 1, 1,  -1, 1,-1,  -1,-1,-1,  -1,-1, 1,   // v1,v6,v7,v2 (left)
+					   -1,-1,-1,   1,-1,-1,   1,-1, 1,  -1,-1, 1,   // v7,v4,v3,v2 (bottom)
+						1,-1,-1,  -1,-1,-1,  -1, 1,-1,   1, 1,-1 }; // v4,v7,v6,v5 (back)
+
+// index array of vertex array for glDrawElements() & glDrawRangeElement()
+GLubyte indices[] = { 0, 1, 2,   2, 3, 0,      // front
+					   4, 5, 6,   6, 7, 4,      // right
+					   8, 9,10,  10,11, 8,      // top
+					  12,13,14,  14,15,12,      // left
+					  16,17,18,  18,19,16,      // bottom
+					  20,21,22,  22,23,20 };    // back
+
+
+void ModuleRenderer3D::drawCubeIndex()
+{
+
+	//GLuint vboId1;
+	//GLuint vboId2;
+	//glGenBuffers(1, &vboId1);
+	//glGenBuffers(1, &vboId2);
+	// bind VBOs for vertex array and index array
+	//glBindBuffer(GL_ARRAY_BUFFER, vboId1);            // for vertex attributes
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboId2);    // for indices
+
+	// enable and specify pointers to vertex arrays
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+	glVertexPointer(3, GL_FLOAT, 0, vertices2);
+
+	glTranslatef(-8, 0, 0);
+
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, indices);
+
+
+	glDisableClientState(GL_VERTEX_ARRAY);  // disable vertex arrays
+
+
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+}
 
 void ModuleRenderer3D::drawCircle()
 {
