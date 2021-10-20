@@ -1,14 +1,18 @@
 #pragma once
+#include <vector>
+
 #include "Module.h"
 #include "Globals.h"
-#include <vector>
+
 #include "glew/include/glew.h"
 #include "SDL/include/SDL_opengl.h"
+#include <gl/GL.h>
 #include <gl/GLU.h>
+
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
-#include <gl/GL.h>
+
 
 using namespace std;
 
@@ -38,9 +42,9 @@ public:
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-	bool Start();
-	update_status Update(float dt);
-	bool CleanUp();
+	bool Start() override;
+	update_status Update(float dt) override;
+	bool CleanUp() override;
 
 public:
 };
