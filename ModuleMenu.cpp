@@ -71,6 +71,8 @@ update_status ModuleMenu::Update(float dt)
             ImGui::MenuItem("About ImGui", NULL, &show_app_about);
             ImGui::EndMenu();
         }
+        if (ImGui::BeginMenu("Close Engine"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+            return UPDATE_STOP;
         ImGui::EndMainMenuBar();
     }
 
@@ -95,8 +97,7 @@ update_status ModuleMenu::Update(float dt)
         //ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 
         //ImGui::Checkbox("Debug Window", &show_debug_window);
-        //if (ImGui::Button("Close Engine"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-        //    return UPDATE_STOP;
+  
 
 
 

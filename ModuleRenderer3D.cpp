@@ -6,9 +6,18 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+#include <vector>
+#include <cmath>
+
+
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
+
+
+#define _USE_MATH_DEFINES
+
+
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -31,6 +40,9 @@ bool ModuleRenderer3D::Init()
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+
+
+
 
 	//Init GLEW library
 	GLenum err = glewInit();
@@ -74,6 +86,7 @@ bool ModuleRenderer3D::Init()
 			LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
 
 		//Initialize Projection Matrix
+
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 
@@ -173,10 +186,10 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	//ImGui::Render();
 	//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	drawCubeDirectMode();
+	/*drawCubeDirectMode();
 	drawCubeVertexArray();
-	drawCubeIndex();
-	
+	drawCubeIndex();*/
+	drawCircle();
 
 	SDL_GL_SwapWindow(App->window->window);
 
@@ -391,6 +404,8 @@ void ModuleRenderer3D::drawCubeIndex()
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 }
+
+
 
 void ModuleRenderer3D::drawCircle()
 {
