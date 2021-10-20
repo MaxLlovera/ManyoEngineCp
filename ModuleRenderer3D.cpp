@@ -10,7 +10,6 @@
 #include <cmath>
 
 
-
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 

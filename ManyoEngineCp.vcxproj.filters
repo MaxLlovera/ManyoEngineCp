@@ -52,6 +52,9 @@
     <Filter Include="Sources\Tools\glew">
       <UniqueIdentifier>{39b66eb0-5d8a-4ac9-81ff-15a21c0f59c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\assimp">
+      <UniqueIdentifier>{ab5d7d52-8e85-423e-912b-d67fe7784c10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -377,6 +380,9 @@
     </ClInclude>
     <ClInclude Include="Imgui\imgui_impl_opengl3_loader.h">
       <Filter>Sources\Tools\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CMakeProject1\out\build\x86-Debug\include\assimp\config.h">
+      <Filter>Sources\Tools\assimp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
