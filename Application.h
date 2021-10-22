@@ -12,6 +12,7 @@
 #include "ModuleCamera3D.h"
 
 #include "ModuleMenu.h"
+#include "ModuleAsimp.h"
 
 class Application
 {
@@ -22,6 +23,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleMenu* menu;
+	ModuleAsimp* asimp;
 
 private:
 
