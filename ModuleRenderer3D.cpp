@@ -182,7 +182,6 @@ update_status ModuleRenderer3D::Update(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-
 	//ImGui::Render();
 	//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	//drawCubeDirectMode();
@@ -341,15 +340,17 @@ void ModuleRenderer3D::drawCubeVertexArray()
 {
 	
 	glGenBuffers(1, (GLuint*)&(my_id));
-	//glBindBuffer(GL_ARRAY_BUFFER, my_id);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_vertices * 3, vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_vertices * 3, vertices, GL_STATIC_DRAW);
+
 	//glDeleteBuffers(1, (GLuint*)&(my_id));
 
 	glEnableClientState(GL_VERTEX_ARRAY); //enable vertex array
 
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
 
-	glTranslatef(8, 0, 0);
+	//glTranslatef(8, 0, 0);
 	glDrawArrays(GL_TRIANGLES, 0, num_vertices);
 
 
