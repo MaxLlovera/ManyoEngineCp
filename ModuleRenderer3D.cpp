@@ -40,13 +40,6 @@ bool ModuleRenderer3D::Init()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-	//Create context
-	context = SDL_GL_CreateContext(App->window->window);
-	if (context == NULL)
-	{
-		LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
-		ret = false;
-	}
 
 
 
@@ -77,6 +70,13 @@ bool ModuleRenderer3D::Init()
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_TEXTURE_2D);
 
+	//Create context
+	context = SDL_GL_CreateContext(App->window->window);
+	if(context == NULL)
+	{
+		LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
+		ret = false;
+	}
 	
 	if(ret == true)
 	{
@@ -185,10 +185,10 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	//ImGui::Render();
 	//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	//drawCubeDirectMode();
+	/*drawCubeDirectMode();
 	drawCubeVertexArray();
-	//drawCubeIndex();
-	//drawCircle();
+	drawCubeIndex();*/
+	drawCircle();
 
 	SDL_GL_SwapWindow(App->window->window);
 
@@ -340,9 +340,9 @@ GLfloat vertices[] = { 1, 1, 1,  -1, 1, 1,  -1,-1, 1,      // v0-v1-v2 (front)
 void ModuleRenderer3D::drawCubeVertexArray()
 {
 	
-	glGenBuffers(1, (GLuint*)&(my_id));
+	//glGenBuffers(1, (GLuint*)&(my_id));
 	//glBindBuffer(GL_ARRAY_BUFFER, my_id);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_vertices * 3, vertices, GL_STATIC_DRAW);
+
 	//glDeleteBuffers(1, (GLuint*)&(my_id));
 
 	glEnableClientState(GL_VERTEX_ARRAY); //enable vertex array
