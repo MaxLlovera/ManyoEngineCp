@@ -603,6 +603,9 @@
     <ClInclude Include="assimp\config.h">
       <Filter>Sources\Tools\assimp</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFbx.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -901,6 +904,9 @@
     </ClCompile>
     <ClCompile Include="Imgui\imgui_impl_opengl3.cpp">
       <Filter>Sources\Tools\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFbx.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleFbx.h"
 
 #include "ModuleMenu.h"
 
@@ -22,6 +23,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleMenu* menu;
+	ModuleFbx* m_fbx;
 
 private:
 

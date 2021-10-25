@@ -10,6 +10,7 @@ Application::Application()
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
 	menu = new ModuleMenu(this);
+	m_fbx = new ModuleFbx(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -20,7 +21,7 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(menu);
-	
+	AddModule(m_fbx);
 	// Scenes
 	AddModule(scene_intro);
 
