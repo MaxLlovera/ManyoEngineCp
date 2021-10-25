@@ -186,7 +186,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	//ImGui::Render();
 	//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	//drawCubeDirectMode();
-	drawCubeVertexArray();
+	//drawCubeVertexArray();
 	//drawCubeIndex();
 	//drawCircle();
 

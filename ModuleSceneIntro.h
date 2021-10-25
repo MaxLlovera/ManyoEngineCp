@@ -8,6 +8,7 @@
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include <gl/GL.h>
+#include "ModuleFbx.h"
 
 class ModuleSceneIntro : public Module
 {
@@ -20,6 +21,8 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-public:
+private:
+	Vertex v;
+	Vertex data;
 };
 

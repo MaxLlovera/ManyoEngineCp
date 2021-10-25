@@ -42,8 +42,6 @@ update_status ModuleFbx::PreUpdate(float dt)
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
-	//Load();
-
 	return UPDATE_CONTINUE;
 	return UPDATE_CONTINUE;
 }
@@ -61,15 +59,12 @@ update_status ModuleFbx::Update(float dt)
 update_status ModuleFbx::PostUpdate(float dt)
 {
 
-
-
 	return UPDATE_CONTINUE;
 }
 
-void ModuleFbx::Load()
+void ModuleFbx::Load(const char* path, Vertex v)
 {
-
-    const aiScene* scene = aiImportFile("Assets/warrior.fbx", aiProcessPreset_TargetRealtime_MaxQuality);
+    const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
     if (scene != nullptr && scene->HasMeshes())
     {
         // Use scene->mNumMeshes to iterate on scene->mMeshes array
@@ -94,19 +89,52 @@ void ModuleFbx::Load()
                     {
                         LOG("WARNING, geometry face with != 3 indices!");
                     }
-                    else
+                    else 
                     {
                         memcpy(&v.index[i * 3], sceneM->mFaces[i].mIndices, 3 * sizeof(uint));
                     }
-
                 }
             }
+            //Vertex _v = v;
+            CreateBuffer(v);
         }
         aiReleaseImport(scene);
     }
     else
         LOG("Error loading scene %s", "Assets/warrior.fbx");
 
+}
+
+void ModuleFbx::CreateBuffer(Vertex data)
+{
+    glGenBuffers(1,&(data.id_vertex));
+    glBindBuffer(GL_ARRAY_BUFFER, data.id_vertex);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * data.num_vertex * 3, data.vertex, GL_STATIC_DRAW);
+
+    glGenBuffers(1, &(data.id_index));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, data.id_index);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * data.num_index, data.index, GL_STATIC_DRAW);
+}
+
+void ModuleFbx::DrawFbx(Vertex data)
+{
+    glEnableClientState(GL_VERTEX_ARRAY);
+
+    //-- Buffers--//
+    glBindBuffer(GL_ARRAY_BUFFER, data.id_vertex);
+    glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, data.id_index);
+
+    //-- Draw --//
+    glDrawElements(GL_TRIANGLES, data.num_index, GL_UNSIGNED_INT, NULL);
+
+    //-- UnBind Buffers--//
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    //--Disables States--//
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 // Called before quitting

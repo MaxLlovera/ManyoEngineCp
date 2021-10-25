@@ -4,6 +4,7 @@
 #include "glmath.h"
 #include "Light.h"
 
+
 struct Vertex {
 	uint id_index = 0; // index in VRAM
 	uint num_index = 0;
@@ -24,9 +25,10 @@ public:
 	update_status Update(float dt) override;
 	update_status PostUpdate(float dt) override;
 	bool CleanUp() override;
-	void Load();
+	void Load(const char* path, Vertex v);
+	void CreateBuffer(Vertex data);
+
+	void DrawFbx(Vertex data);
 
 private:
-	Vertex v;
-
 };
