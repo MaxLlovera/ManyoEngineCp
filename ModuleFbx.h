@@ -12,6 +12,10 @@ struct Vertex {
 	uint id_vertex = 0; // unique vertex in VRAM
 	uint num_vertex = 0;
 	float* vertex = nullptr;
+	
+	//CreateBuffer();
+	//DrawFbx();
+
 };
 
 class ModuleFbx : public Module
@@ -26,9 +30,10 @@ public:
 	update_status PostUpdate(float dt) override;
 	bool CleanUp() override;
 	void Load(const char* path, Vertex v);
+	
 	void CreateBuffer(Vertex data);
-
 	void DrawFbx(Vertex data);
 
 private:
+
 };

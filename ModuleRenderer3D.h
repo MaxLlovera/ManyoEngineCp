@@ -6,6 +6,20 @@
 
 #define MAX_LIGHTS 8
 
+
+//struct Vertex {
+//	uint id_index = 0; // index in VRAM
+//	uint num_index = 0;
+//	uint* index = nullptr;
+//	uint id_vertex = 0; // unique vertex in VRAM
+//	uint num_vertex = 0;
+//	float* vertex = nullptr;
+//
+//	CreateBuffer();
+//	DrawFbx();
+//
+//};
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -18,7 +32,7 @@ public:
 	update_status PostUpdate(float dt) override;
 	bool CleanUp() override;
 
-
+	//void drawFBX(Vertex data);
 
 	void OnResize(int width, int height);
 
@@ -39,4 +53,5 @@ public:
 	int num_vertices = 36;
 	uint my_id = 0;
 
+	Vertex v;
 };

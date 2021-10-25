@@ -5,6 +5,7 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include "ModuleFbx.h"
 
 #include <vector>
 #include <cmath>
@@ -76,8 +77,8 @@ bool ModuleRenderer3D::Init()
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_TEXTURE_2D);
 
+	App->m_fbx->Load("Assets/BakerHouse.fbx", v);
 
-	
 	if(ret == true)
 	{
 		//Use Vsync
@@ -172,8 +173,8 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 update_status ModuleRenderer3D::Update(float dt)
 {
-
 	//drawCube();
+	App->m_fbx->DrawFbx(v);
 	return UPDATE_CONTINUE;
 
 }
@@ -189,6 +190,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	//drawCubeVertexArray();
 	//drawCubeIndex();
 	//drawCircle();
+
+
 
 	SDL_GL_SwapWindow(App->window->window);
 
@@ -245,6 +248,28 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
+
+//void ModuleRenderer3D::drawFBX(Vertex data)
+//{
+//	glEnableClientState(GL_VERTEX_ARRAY);
+//
+//	//-- Buffers--//
+//	glBindBuffer(GL_ARRAY_BUFFER, data.id_vertex);
+//	glVertexPointer(3, GL_FLOAT, 0, NULL);
+//
+//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, data.id_index);
+//
+//	//-- Draw --//
+//	glDrawElements(GL_TRIANGLES, data.num_index, GL_UNSIGNED_INT, NULL);
+//
+//	//-- UnBind Buffers--//
+//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//	glBindBuffer(GL_ARRAY_BUFFER, 0);
+//
+//	//--Disables States--//
+//	glDisableClientState(GL_VERTEX_ARRAY);
+//
+//}
 
 
 void ModuleRenderer3D::drawCubeDirectMode()

@@ -43,7 +43,6 @@ update_status ModuleFbx::PreUpdate(float dt)
 	aiAttachLogStream(&stream);
 
 	return UPDATE_CONTINUE;
-	return UPDATE_CONTINUE;
 }
 
 update_status ModuleFbx::Update(float dt)
@@ -107,11 +106,11 @@ void ModuleFbx::Load(const char* path, Vertex v)
 
 void ModuleFbx::CreateBuffer(Vertex data)
 {
-    glGenBuffers(1,&(data.id_vertex));
+    glGenBuffers(1,&data.id_vertex);
     glBindBuffer(GL_ARRAY_BUFFER, data.id_vertex);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * data.num_vertex * 3, data.vertex, GL_STATIC_DRAW);
 
-    glGenBuffers(1, &(data.id_index));
+    glGenBuffers(1, &data.id_index);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, data.id_index);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * data.num_index, data.index, GL_STATIC_DRAW);
 }

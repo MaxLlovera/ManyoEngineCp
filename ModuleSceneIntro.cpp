@@ -21,7 +21,9 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
-	App->m_fbx->Load("Assets/BakerHouse.fbx", v);
+
+	//App->m_fbx->Load("Assets/BakerHouse.fbx", v);
+
 
 	return ret;
 }
@@ -41,7 +43,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 
-	App->m_fbx->DrawFbx(data);
+	//v.DrawFbx();
 
 	return UPDATE_CONTINUE;
 }

@@ -10,6 +10,19 @@
 #include <gl/GL.h>
 #include "ModuleFbx.h"
 
+//struct Vertex {
+//	uint id_index = 0; // index in VRAM
+//	uint num_index = 0;
+//	uint* index = nullptr;
+//	uint id_vertex = 0; // unique vertex in VRAM
+//	uint num_vertex = 0;
+//	float* vertex = nullptr;
+//
+//	CreateBuffer();
+//	DrawFbx();
+//
+//};
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -22,7 +35,7 @@ public:
 	bool CleanUp();
 
 private:
-	Vertex v;
-	Vertex data;
+	//Vertex v;
+
 };
 
