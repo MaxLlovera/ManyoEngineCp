@@ -12,7 +12,7 @@
 #include "assimp/cimport.h"
 #include "assimp/scene.h"
 #include "assimp/postprocess.h"
-#pragma comment (lib, "assimp/libx86/assimp-vc142-mtd.lib")
+
 
 ModuleFbx::ModuleFbx(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
