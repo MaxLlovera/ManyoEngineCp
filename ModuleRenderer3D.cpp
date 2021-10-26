@@ -77,7 +77,7 @@ bool ModuleRenderer3D::Init()
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_TEXTURE_2D);
 
-	App->m_fbx->Load("Assets/BakerHouse.fbx", v);
+	//App->m_fbx->Load("Assets/BakerHouse.fbx", v);
 
 	if(ret == true)
 	{
@@ -174,7 +174,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::Update(float dt)
 {
 	//drawCube();
-	App->m_fbx->DrawFbx(v);
+	//App->m_fbx->DrawFbx(v);
 	return UPDATE_CONTINUE;
 
 }

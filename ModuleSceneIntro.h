@@ -35,7 +35,7 @@ public:
 	bool CleanUp();
 
 private:
-	//Vertex v;
+	Vertex v;
 
 };
 

@@ -61,7 +61,7 @@ update_status ModuleFbx::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-void ModuleFbx::Load(const char* path, Vertex v)
+void ModuleFbx::Load(const char* path, Vertex& v)
 {
     const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
     if (scene != nullptr && scene->HasMeshes())

@@ -29,7 +29,7 @@ public:
 	update_status Update(float dt) override;
 	update_status PostUpdate(float dt) override;
 	bool CleanUp() override;
-	void Load(const char* path, Vertex v);
+	void Load(const char* path, Vertex& v);
 	
 	void CreateBuffer(Vertex data);
 	void DrawFbx(Vertex data);
