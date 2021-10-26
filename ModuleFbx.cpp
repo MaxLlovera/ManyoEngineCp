@@ -95,7 +95,9 @@ void ModuleFbx::Load(const char* path, Vertex &v)
                 }
             }
             //Vertex _v = v;
-            CreateBuffer(v);
+            v.CreateBuffer();
+
+			//patillada important
 			num_meshes = i;
         }
         aiReleaseImport(scene);
@@ -105,29 +107,29 @@ void ModuleFbx::Load(const char* path, Vertex &v)
 
 }
 
-void ModuleFbx::CreateBuffer(Vertex &data)
+void Vertex::CreateBuffer()
 {
-    glGenBuffers(1,&data.id_vertex);
-    glBindBuffer(GL_ARRAY_BUFFER, data.id_vertex);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * data.num_vertex * 3, data.vertex, GL_STATIC_DRAW);
+    glGenBuffers(1,&id_vertex);
+    glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * num_vertex * 3, vertex, GL_STATIC_DRAW);
 
-    glGenBuffers(1, &data.id_index);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, data.id_index);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * data.num_index, data.index, GL_STATIC_DRAW);
+    glGenBuffers(1, &id_index);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * num_index, index, GL_STATIC_DRAW);
 }
 
-void ModuleFbx::DrawFbx(Vertex &data)
+void Vertex::DrawFbx()
 {
     glEnableClientState(GL_VERTEX_ARRAY);
 
     //-- Buffers--//
-    glBindBuffer(GL_ARRAY_BUFFER, data.id_vertex);
+    glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
     glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, data.id_index);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
 
     //-- Draw --//
-    glDrawElements(GL_TRIANGLES, data.num_index, GL_UNSIGNED_INT, NULL);
+    glDrawElements(GL_TRIANGLES, num_index, GL_UNSIGNED_INT, NULL);
 
     //-- UnBind Buffers--//
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

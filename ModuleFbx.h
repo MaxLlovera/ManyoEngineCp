@@ -13,8 +13,8 @@ struct Vertex {
 	uint num_vertex = 0;
 	float* vertex = nullptr;
 	
-	//CreateBuffer();
-	//DrawFbx();
+	void CreateBuffer();
+	void DrawFbx();
 
 };
 
@@ -31,8 +31,8 @@ public:
 	bool CleanUp() override;
 	void Load(const char* path, Vertex &v);
 	
-	void CreateBuffer(Vertex &data);
-	void DrawFbx(Vertex &data);
+	//void CreateBuffer(Vertex &data);
+	//void DrawFbx(Vertex &data);
 
 	int num_meshes = 0;
 
