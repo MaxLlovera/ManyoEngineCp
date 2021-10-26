@@ -53,5 +53,5 @@ public:
 	int num_vertices = 36;
 	uint my_id = 0;
 
-	//Vertex v;
+	Vertex v;
 };

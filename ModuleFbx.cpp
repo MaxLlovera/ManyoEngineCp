@@ -61,7 +61,7 @@ update_status ModuleFbx::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-void ModuleFbx::Load(const char* path, Vertex& v)
+void ModuleFbx::Load(const char* path, Vertex &v)
 {
     const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
     if (scene != nullptr && scene->HasMeshes())
@@ -96,6 +96,7 @@ void ModuleFbx::Load(const char* path, Vertex& v)
             }
             //Vertex _v = v;
             CreateBuffer(v);
+			num_meshes = i;
         }
         aiReleaseImport(scene);
     }
@@ -104,7 +105,7 @@ void ModuleFbx::Load(const char* path, Vertex& v)
 
 }
 
-void ModuleFbx::CreateBuffer(Vertex data)
+void ModuleFbx::CreateBuffer(Vertex &data)
 {
     glGenBuffers(1,&data.id_vertex);
     glBindBuffer(GL_ARRAY_BUFFER, data.id_vertex);
@@ -115,7 +116,7 @@ void ModuleFbx::CreateBuffer(Vertex data)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * data.num_index, data.index, GL_STATIC_DRAW);
 }
 
-void ModuleFbx::DrawFbx(Vertex data)
+void ModuleFbx::DrawFbx(Vertex &data)
 {
     glEnableClientState(GL_VERTEX_ARRAY);
 

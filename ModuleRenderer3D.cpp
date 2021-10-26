@@ -11,6 +11,10 @@
 #include <cmath>
 
 
+#include "assimp/cimport.h"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
+
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
@@ -40,7 +44,6 @@ bool ModuleRenderer3D::Init()
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-
 
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
@@ -77,7 +80,7 @@ bool ModuleRenderer3D::Init()
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_TEXTURE_2D);
 
-	//App->m_fbx->Load("Assets/BakerHouse.fbx", v);
+	App->m_fbx->Load("Assets/BakerHouse.fbx", v);
 
 	if(ret == true)
 	{
@@ -174,7 +177,11 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::Update(float dt)
 {
 	//drawCube();
-	//App->m_fbx->DrawFbx(v);
+	for (int i = 0; i < App->m_fbx->num_meshes; ++i)
+	{
+		App->m_fbx->DrawFbx(v);
+	}
+	
 	return UPDATE_CONTINUE;
 
 }
