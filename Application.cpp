@@ -20,13 +20,15 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	AddModule(menu);
+	
 	AddModule(m_fbx);
 	// Scenes
 	AddModule(scene_intro);
 
 	// Renderer last!
 	AddModule(renderer3D);
+
+	AddModule(menu);
 }
 
 Application::~Application()

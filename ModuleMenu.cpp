@@ -187,6 +187,68 @@ update_status ModuleMenu::Update(float dt)
         if (ImGui::CollapsingHeader("Hardware"))
         {
 
+			if (ImGui::Checkbox("Active:", &active)) {}
+			ImGui::Text("SDL Version: %d.%d.%d ", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
+			ImGui::Separator();
+			ImGui::Text("CPUs: %d (Cache: %d Kb)",SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
+			ImGui::Text("System RAM: %d Mb", SDL_GetSystemRAM());
+			ImGui::Text("Caps: ");
+			if (SDL_Has3DNow() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("3DNow,");
+			}
+			if (SDL_HasAltiVec() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("AltiVec,");
+			}
+			if (SDL_HasAVX() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("AVX,");
+			}
+			if (SDL_HasAVX2() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("AVX2,");
+			}
+			if (SDL_HasMMX() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("MMX,");
+			}
+			if (SDL_HasRDTSC() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("RDTSC,");
+			}
+			if (SDL_HasSSE() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("SSE,");
+			}
+			if (SDL_HasSSE2() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("SSE2,");
+			}
+			if (SDL_HasSSE3() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("SSE3,");
+			}
+			if (SDL_HasSSE41() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("SSE41,");
+			}
+			if (SDL_HasSSE42() == true)
+			{
+				ImGui::SameLine();
+				ImGui::Text("SSE42,");
+			}
+			
         }
 
         ImGui::End();
