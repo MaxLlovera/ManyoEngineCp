@@ -187,7 +187,7 @@ update_status ModuleMenu::Update(float dt)
         if (ImGui::CollapsingHeader("Hardware"))
         {
 
-			if (ImGui::Checkbox("Active:", &active)) {}
+			if (ImGui::Checkbox("Active", &active)) {}
 			ImGui::Text("SDL Version: %d.%d.%d ", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 			ImGui::Separator();
 			ImGui::Text("CPUs: %d (Cache: %d Kb)",SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
