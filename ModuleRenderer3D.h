@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
-
+#include <vector>
 #define MAX_LIGHTS 8
 
 
@@ -53,5 +53,5 @@ public:
 	int num_vertices = 36;
 	uint my_id = 0;
 
-	Vertex v;
+	std::vector<Vertex> v;
 };

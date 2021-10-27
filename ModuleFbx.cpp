@@ -61,27 +61,29 @@ update_status ModuleFbx::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-void ModuleFbx::Load(const char* path, Vertex &v)
+void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
 {
     const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
     if (scene != nullptr && scene->HasMeshes())
     {
         // Use scene->mNumMeshes to iterate on scene->mMeshes array
+		v.resize(scene->mNumMeshes);
         for (int i = 0; i < scene->mNumMeshes; ++i)
         {
+			Vertex& _v = v[i];
             aiMesh* sceneM = scene->mMeshes[i];
 
-            // copy vertices
-            v.num_vertex = sceneM->mNumVertices;
-            v.vertex = new float[v.num_vertex * 3];
-            memcpy(v.vertex, sceneM->mVertices, sizeof(float) * v.num_vertex * 3);
-            LOG("New mesh with %d vertices", v.num_vertex);
+			// copy vertices
+            _v.num_vertex = sceneM->mNumVertices;
+            _v.vertex = new float[_v.num_vertex * 3];
+            memcpy(_v.vertex, sceneM->mVertices, sizeof(float) * _v.num_vertex * 3);
+            LOG("New mesh with %d vertices", _v.num_vertex);
 
             // copy faces
             if (sceneM->HasFaces())
             {
-                v.num_index = sceneM->mNumFaces * 3;
-                v.index = new uint[v.num_index]; // assume each face is a triangle
+                _v.num_index = sceneM->mNumFaces * 3;
+                _v.index = new uint[_v.num_index]; // assume each face is a triangle
                 for (uint i = 0; i < sceneM->mNumFaces; ++i)
                 {
                     if (sceneM->mFaces[i].mNumIndices != 3)
@@ -90,15 +92,12 @@ void ModuleFbx::Load(const char* path, Vertex &v)
                     }
                     else 
                     {
-                        memcpy(&v.index[i * 3], sceneM->mFaces[i].mIndices, 3 * sizeof(uint));
+                        memcpy(&_v.index[i * 3], sceneM->mFaces[i].mIndices, 3 * sizeof(uint));
                     }
                 }
             }
             //Vertex _v = v;
-            v.CreateBuffer();
-
-			//patillada important
-			num_meshes = i;
+            _v.CreateBuffer();
         }
         aiReleaseImport(scene);
     }

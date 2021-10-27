@@ -177,9 +177,9 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::Update(float dt)
 {
 	//drawCube();
-	for (int i = 0; i < App->m_fbx->num_meshes; ++i)
+	for (int i = 0; i < v.size(); ++i)
 	{
-		v.DrawFbx();
+		v[i].DrawFbx();
 	}
 	return UPDATE_CONTINUE;
 
