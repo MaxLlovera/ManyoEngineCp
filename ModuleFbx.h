@@ -12,9 +12,17 @@ struct Vertex {
 	uint id_vertex = 0; // unique vertex in VRAM
 	uint num_vertex = 0;
 	//uint meshes = 0;
+
+	//Tex
+	uint id_tex = 0;
+	uint textureID = 0;
+	uint num_tex = 0;
+
 	float* vertex = nullptr;
+	float* tex = nullptr;
 	
 	void CreateBuffer();
+	void CreateBufferTex(const void* checkerImage);
 	void DrawFbx();
 
 };
