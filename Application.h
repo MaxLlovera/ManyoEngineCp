@@ -30,6 +30,8 @@ private:
 	Timer	ms_timer;
 	float	dt;
 	std::list<Module*> list_modules;
+	float fps;
+	float capped_ms;
 
 public:
 
@@ -40,9 +42,11 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+
 private:
 
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+
 };

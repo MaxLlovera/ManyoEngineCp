@@ -33,12 +33,12 @@ public:
 	bool resizable = false;
 	bool fullscreen = false;
 
+	char name[32];
+	char organization[32];
 	vector<float> fps_log;
 	vector<float> ms_log;
-	int max_fps = 30;
 
-	int last_fps = 60;
-	int last_ms = 60;
+	int max_fps = 0;
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 

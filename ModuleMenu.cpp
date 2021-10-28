@@ -113,34 +113,23 @@ update_status ModuleMenu::Update(float dt)
 
 
         //ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::Text("options");
+        ImGui::Text("Options");
 
         if (ImGui::CollapsingHeader("Application"))
         {
-            int fps = last_fps;
-            int ms = last_ms;
-            //Get frames
-            if (fps_log.size() > 100) //Max seconds to show
-            {
-                for (size_t i = 1; i < fps_log.size(); i++)
-                {
-                    fps_log[i - 1] = fps_log[i];
-                    //ms_log[i - 1] = ms_log[i];
-                }
-                fps_log[fps_log.size() - 1] = fps;
-                //ms_log[ms_log.size() - 1] = fps;
-            }
-            else
-            {
-                fps_log.push_back(fps);
-                //ms_log.push_back(fps);
-            }
+			
+			if (ImGui::InputText("App Name", "Manyo EngineCp", 32)) App->window->SetTitle(name);
+			if (ImGui::InputText("Organization", "UPC", 32)) App->window->SetTitle(organization);
+			
+			//ImGui::SliderInt("FPS max", max_fps, 1, 120);
 
+			fps_log.push_back(1/dt);
+			ms_log.push_back(dt*1000);
             char title[25];
             sprintf_s(title, 25, "Framerate %.1f", fps_log[fps_log.size() - 1]);
             ImGui::PlotHistogram("##framerate", &fps_log[0], fps_log.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
-            /*sprintf_s(title, 25, "Milliseconds %.0.1f", ms_log[ms_log.size() - 1]);
-            ImGui::PlotHistogram("##milliseconds", &ms_log[0], ms_log.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));*/
+            sprintf_s(title, 25, "Milliseconds %0.1f", ms_log[ms_log.size() - 1]);
+            ImGui::PlotHistogram("##milliseconds", &ms_log[0], ms_log.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
 
 
         }
