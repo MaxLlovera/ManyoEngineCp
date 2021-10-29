@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleMenu.h"
 #include "Primitive.h"
+#include "Console.h"
 #include <Windows.h>
 
 
@@ -28,7 +29,7 @@ bool ModuleMenu::Start()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL3_Init();
 
-	
+
 
 	return ret;
 }
@@ -52,6 +53,8 @@ update_status ModuleMenu::Update(float dt)
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
+
+
     // Menu
     if (ImGui::BeginMainMenuBar())
     {
@@ -63,6 +66,7 @@ update_status ModuleMenu::Update(float dt)
         if (ImGui::BeginMenu("View"))
         {
             ImGui::MenuItem("Configuration", NULL, &show_app_main_menu_bar);
+            ImGui::MenuItem("Console", NULL, &showConsole);
             
             ImGui::EndMenu();
         }
@@ -78,6 +82,12 @@ update_status ModuleMenu::Update(float dt)
         ImGui::EndMainMenuBar();
     }
 
+	if (showConsole)
+	{
+		//Console
+		static Console console;
+		console.Draw("Console", &showConsole);
+	}
     if (show_app_main_menu_bar)
     {
         if (show_demo_window)

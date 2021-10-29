@@ -606,6 +606,9 @@
     <ClInclude Include="ModuleFbx.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Sources\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -907,6 +910,9 @@
     </ClCompile>
     <ClCompile Include="ModuleFbx.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Sources\Containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

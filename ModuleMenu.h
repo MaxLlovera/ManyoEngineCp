@@ -35,7 +35,7 @@ public:
 	bool fullDesktop = false;
 	bool borderless = true;
 
-	bool showConsole = true;
+	bool showConsole = false;
 
 	char name[32];
 	char organization[32];
