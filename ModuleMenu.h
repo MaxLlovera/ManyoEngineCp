@@ -30,8 +30,12 @@ public:
 	bool show_app_about = false;
 	bool about_us = false;
 	bool active = false;
-	bool resizable = false;
+	bool resizable = true;
 	bool fullscreen = false;
+	bool fullDesktop = false;
+	bool borderless = true;
+
+	bool showConsole = true;
 
 	char name[32];
 	char organization[32];
@@ -41,10 +45,13 @@ public:
 	int max_fps = 0;
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	ImVec4 color_hardware = ImVec4(1.0f, 1.0f, 0.0f, 1.00f);
 
 	bool Start() override;
 	update_status Update(float dt) override;
 	bool CleanUp() override;
+
+	//Console c;
 
 public:
 };

@@ -95,18 +95,25 @@ void ModuleWindow::SetTitle(const char* title)
 
 void ModuleWindow::SetFullScreen(bool fullScreen)
 {
-	SDL_SetWindowFullscreen(window, fullScreen);
+	if(fullScreen)
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+	else
+		SDL_SetWindowFullscreen(window, 0);
 }
 
 void ModuleWindow::SetResizable(bool resizable)
 {
-	//WIN_RESIZABLE = resizable;
+	if (resizable)
+		SDL_SetWindowResizable(window, SDL_TRUE);
+	else
+		SDL_SetWindowResizable(window, SDL_FALSE);
 
 }
 
 void ModuleWindow::SetBrightness(float brightness)
 {
 	SDL_SetWindowBrightness(window, brightness);
+
 }
 
 float ModuleWindow::GetBrightness()
@@ -115,20 +122,37 @@ float ModuleWindow::GetBrightness()
 }
 
 
+void ModuleWindow::GetWindowSize(int &width, int &height)
+{
+	SDL_GetWindowSize(window, &width, &height);
+}
 
 void ModuleWindow::SetWindowSize(int width, int height)
 {
 	SDL_SetWindowSize(window, width, height);
 }
 
-
-int ModuleWindow::GetWidth()
+void  ModuleWindow::SetFullDesktop(bool &fullDesktop)
 {
-	return 0;
-	
+	if(fullDesktop)
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	else
+		SDL_SetWindowFullscreen(window, 0);
 }
 
-int ModuleWindow::GetHeight()
+void ModuleWindow::SetBorderless(bool borderless)
 {
-	return 0;
+	if (borderless)
+		SDL_SetWindowBordered(window, SDL_TRUE);
+	else
+		SDL_SetWindowBordered(window, SDL_FALSE);
+
 }
+
+//int ModuleWindow::GetRefreshRate()
+//{
+//	return
+//}
+
+
+

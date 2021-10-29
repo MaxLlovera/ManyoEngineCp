@@ -23,9 +23,11 @@ public:
 	void SetResizable(bool resizable);
 	void SetBrightness(float brightness);
 	void SetWindowSize(int width, int height);
-	
-	int GetWidth();
-	int GetHeight();
+	void SetFullDesktop(bool &fullDesktop);
+	void SetBorderless(bool borderless);
+
+	void GetWindowSize(int &width, int &height);
+	//int GetRefreshRate();
 	
 	float GetBrightness();
 

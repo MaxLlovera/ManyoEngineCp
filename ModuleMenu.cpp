@@ -28,6 +28,8 @@ bool ModuleMenu::Start()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL3_Init();
 
+	
+
 	return ret;
 }
 
@@ -136,35 +138,50 @@ update_status ModuleMenu::Update(float dt)
         if (ImGui::CollapsingHeader("Window"))
         {
 			//Active
-            if (ImGui::Checkbox("Active", &active)) {}
+            //if (ImGui::Checkbox("Active", &active))
 
 
-            ImGui::Text("Icon: *default!*");
+            //ImGui::Text("Icon: *default!*");
 						
 			//Brightness
-			static float f=1;
-			f = App->window->GetBrightness();
-			if (ImGui::SliderFloat("Brightness", &f, 0.0f, 1.0f)) {}
+			static float f = App->window->GetBrightness();
+			if (ImGui::SliderFloat("Brightness", &f, 0.0f, 1.0f))
 			App->window->SetBrightness(f);
 
-			//Width
-			static int i2 = 1024;
-			if (ImGui::SliderInt("Width", &i2, 0, 4000)) {}
-           
-			//Height
-			static int i3 = 800;
-			if (ImGui::SliderInt("Height", &i3, 0, 2000)) {}
-            App->window->SetWindowSize(i2,i3);
+
+			//Width and height
+			static int widht, height;
+			App->window->GetWindowSize(widht, height);
+			if (ImGui::SliderInt("Width", &widht, 500, 3000)||(ImGui::SliderInt("Height", &height, 250, 1600)))
+            App->window->SetWindowSize(widht, height);
+
+			//Refresh rate
 
 			//FullScreen
-            if (ImGui::Checkbox("FullScreen", &fullscreen)) {}
+            if (ImGui::Checkbox("FullScreen", &fullscreen))
             App->window->SetFullScreen(fullscreen);
 
-
+			//Resizable
             ImGui::SameLine();
-            if (ImGui::Checkbox("Resizable", &resizable)) {}
-           // App->window->SetResizable(resizable);
+            if (ImGui::Checkbox("Resizable", &resizable))
+            App->window->SetResizable(resizable);
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Restart to apply");
+
+
+			//Borderless
+			if (ImGui::Checkbox("Borderless", &borderless))
+			App->window->SetBorderless(borderless);
+
+			//Full Desktop
+			ImGui::SameLine();
+			if (ImGui::Checkbox("Full Desktop", &fullDesktop))
+			App->window->SetFullDesktop(fullDesktop);
+
+
+
         }
+
         if (ImGui::CollapsingHeader("File System"))
         {
 
@@ -175,67 +192,75 @@ update_status ModuleMenu::Update(float dt)
         }
         if (ImGui::CollapsingHeader("Hardware"))
         {
-
 			if (ImGui::Checkbox("Active", &active)) {}
 			ImGui::Text("SDL Version: %d.%d.%d ", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 			ImGui::Separator();
-			ImGui::Text("CPUs: %d (Cache: %d Kb)",SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
-			ImGui::Text("System RAM: %d Mb", SDL_GetSystemRAM());
+			//CPU
+			ImGui::Text("CPUs:");
+			ImGui::SameLine();
+			ImGui::TextColored(color_hardware," %d (Cache: %d Kb)", SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
+
+			//SYSTEM RAM
+			ImGui::Text("System RAM:");
+			ImGui::SameLine();
+			ImGui::TextColored(color_hardware, " %d Mb", SDL_GetSystemRAM());
+				
+			//CAPS
 			ImGui::Text("Caps: ");
 			if (SDL_Has3DNow() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("3DNow,");
+				ImGui::TextColored(color_hardware, "3DNow,");
 			}
 			if (SDL_HasAltiVec() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("AltiVec,");
+				ImGui::TextColored(color_hardware, "AltiVec,");
 			}
 			if (SDL_HasAVX() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("AVX,");
+				ImGui::TextColored(color_hardware, "AVX,");
 			}
 			if (SDL_HasAVX2() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("AVX2,");
+				ImGui::TextColored(color_hardware, "AVX2,");
 			}
 			if (SDL_HasMMX() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("MMX,");
+				ImGui::TextColored(color_hardware, "MMX,");
 			}
 			if (SDL_HasRDTSC() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("RDTSC,");
+				ImGui::TextColored(color_hardware, "RDTSC,");
 			}
 			if (SDL_HasSSE() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("SSE,");
+				ImGui::TextColored(color_hardware, "SSE,");
 			}
 			if (SDL_HasSSE2() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("SSE2,");
+				ImGui::TextColored(color_hardware, "SSE2,");
 			}
 			if (SDL_HasSSE3() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("SSE3,");
+				ImGui::TextColored(color_hardware, "SSE3,");
 			}
 			if (SDL_HasSSE41() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("SSE41,");
+				ImGui::TextColored(color_hardware, "SSE41,");
 			}
 			if (SDL_HasSSE42() == true)
 			{
 				ImGui::SameLine();
-				ImGui::Text("SSE42,");
+				ImGui::TextColored(color_hardware, "SSE42,");
 			}
 			
         }
@@ -258,7 +283,22 @@ update_status ModuleMenu::Update(float dt)
     {
         if (ImGui::Begin("About Us", &about_us))
         {
-            ImGui::TextWrapped("This is ManyoEngineCp \nThe next Generation 3d Engine \nBy Max Llovera & Arnau Ustrell\n");
+			ImGui::TextWrapped("This is");
+			ImGui::SameLine();
+			if (ImGui::SmallButton("ManyoEngineCp"))
+				ShellExecuteA(NULL, "open", "https://github.com/MaxLlovera/ManyoEngineCp", NULL, NULL, SW_SHOWDEFAULT);
+			ImGui::TextWrapped("The next Generation 3d Engine");
+			ImGui::TextWrapped("By ");
+			ImGui::SameLine();
+			if (ImGui::SmallButton("Max Llovera"))
+				ShellExecuteA(NULL, "open", "https://github.com/MaxLlovera", NULL, NULL, SW_SHOWDEFAULT);
+			ImGui::SameLine();
+			ImGui::TextWrapped("and ");
+			ImGui::SameLine();
+			if (ImGui::SmallButton("Arnau Ustrell"))
+				ShellExecuteA(NULL, "open", "https://github.com/arnauustrell", NULL, NULL, SW_SHOWDEFAULT);
+
+			//ManyoEngineCp \nThe next Generation 3d Engine \nBy Max Llovera & Arnau Ustrell\n");
             ImGui::TextWrapped("License:\n");
             ImGui::TextWrapped("MIT License\n");
             ImGui::TextWrapped("Copyright (c) 2021 MaxLlovera\n");
@@ -284,3 +324,5 @@ update_status ModuleMenu::Update(float dt)
 
 	return UPDATE_CONTINUE;
 }
+
+
