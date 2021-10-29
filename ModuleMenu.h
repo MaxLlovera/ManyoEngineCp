@@ -36,6 +36,15 @@ public:
 	bool borderless = true;
 
 	bool showConsole = false;
+	bool showOptions = false;
+
+	//enable/disable
+	bool depthTest = true;
+	bool cullFace = true;
+	bool lighting = true;
+	bool colorMaterial = true;
+	bool texture2D = true;
+	//two more
 
 	char name[32];
 	char organization[32];

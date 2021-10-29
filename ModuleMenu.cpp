@@ -67,7 +67,9 @@ update_status ModuleMenu::Update(float dt)
         {
             ImGui::MenuItem("Configuration", NULL, &show_app_main_menu_bar);
             ImGui::MenuItem("Console", NULL, &showConsole);
+			ImGui::MenuItem("Options", NULL, &showOptions);
             
+
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("Help"))
@@ -88,6 +90,27 @@ update_status ModuleMenu::Update(float dt)
 		static Console console;
 		console.Draw("Console", &showConsole);
 	}
+
+	if (showOptions)
+	{
+		if (ImGui::Checkbox("GL_DEPTH_TEST", &depthTest))
+			glDisable(GL_DEPTH_TEST);
+
+		if (ImGui::Checkbox("GL_CULL_FACE", &cullFace))
+			glDisable(GL_CULL_FACE);
+
+		if (ImGui::Checkbox("GL_LIGHTING", &lighting))
+			glDisable(GL_LIGHTING);
+
+		if (ImGui::Checkbox("GL_COLOR_MATERIAL", &colorMaterial))
+			glDisable(GL_COLOR_MATERIAL);
+
+		if (ImGui::Checkbox("GL_TEXTURE_2D", &texture2D))
+			glDisable(GL_TEXTURE_2D);
+
+			
+	}
+
     if (show_app_main_menu_bar)
     {
         if (show_demo_window)
@@ -129,7 +152,7 @@ update_status ModuleMenu::Update(float dt)
 
         if (ImGui::CollapsingHeader("Application"))
         {
-			
+			//const char* name = App->window->GetTitle();			
 			if (ImGui::InputText("App Name", "Manyo EngineCp", 32)) App->window->SetTitle(name);
 			if (ImGui::InputText("Organization", "UPC", 32)) App->window->SetTitle(organization);
 			

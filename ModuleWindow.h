@@ -19,6 +19,7 @@ public:
 	bool CleanUp() override;
 
 	void SetTitle(const char* title);
+	const char* GetTitle();
 	void SetFullScreen(bool fullScreen);
 	void SetResizable(bool resizable);
 	void SetBrightness(float brightness);
