@@ -609,6 +609,9 @@
     <ClInclude Include="Console.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="DragDrop.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -913,6 +916,9 @@
     </ClCompile>
     <ClCompile Include="Console.cpp">
       <Filter>Sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="DragDrop.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
