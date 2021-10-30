@@ -9,19 +9,19 @@ struct Vertex {
 	uint id_index = 0; // index in VRAM
 	uint num_index = 0;
 	uint* index = nullptr;
+
 	uint id_vertex = 0; // unique vertex in VRAM
 	uint num_vertex = 0;
-	//uint meshes = 0;
+	float* vertex = nullptr;
 
 	//Tex
 	uint id_tex = 0;
-	uint textureID = 0;
+	//uint textureID = 0;
 	uint num_tex = 0;
 	float* texCoords = nullptr;
-	GLuint* textureIds = NULL;
-
-	float* vertex = nullptr;
-	float* tex = nullptr;
+	GLuint textureID;
+	
+	//float* tex = nullptr;
 	
 
 

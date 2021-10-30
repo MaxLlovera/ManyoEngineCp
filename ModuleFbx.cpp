@@ -153,9 +153,18 @@ void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
 
                 }
             }
+
+			// copy tex coords
+			_v.texCoords = new float[_v.num_vertex * 2];
+			for (size_t k = 0; k < sceneM->mNumVertices; k++) {
+				if (sceneM->mTextureCoords[0]) {
+					_v.texCoords[k * 2] = sceneM->mTextureCoords[0][k].x;
+					_v.texCoords[k * 2 + 1] = sceneM->mTextureCoords[0][k].y;
+				}
+			}
 			
-				_v.textureIds = new GLuint[scene->mNumTextures];
-				glGenTextures(scene->mNumTextures, _v.textureIds);// generate GL-textures ID's
+				//_v.textureIds = new GLuint[scene->mNumTextures];
+				//glGenTextures(scene->mNumTextures, _v.textureIds);// generate GL-textures ID's
 				// upload textures
 				//for (size_t ti = 0; ti < scene->mNumTextures; ti++)
 				//{
@@ -181,8 +190,6 @@ void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
 				memcpy(_v.texCoords, sceneM->mTextureCoords, sizeof(float) * _v.num_index * 3);
 				//_v.texCoords = sceneM->mTextureCoords;
 			}*/
-
-
 
             //Vertex _v = v;
             _v.CreateBuffer();
@@ -213,20 +220,26 @@ void Vertex::CreateBuffer()
 void Vertex::CreateBufferTex(const void *checkerImage)
 {
 	
-	glGenBuffers(1, &id_tex);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_tex);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * num_tex, tex, GL_STATIC_DRAW);
-
+	glGenBuffers(1, &textureID);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, textureID);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * num_tex, texCoords, GL_STATIC_DRAW);
+	//abans
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * num_tex, tex, GL_STATIC_DRAW);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	//ara
+	/*glGenTextures(1, &id_tex);
+	glBindTexture(GL_TEXTURE_2D, id_tex);*/
+	//abans
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glGenerateMipmap(GL_TEXTURE_2D);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
 
-	glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_TEXTURE_2D);
 }
 
 
@@ -235,14 +248,18 @@ void Vertex::DrawFbx()
 
     glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
+	glEnable(GL_TEXTURE_2D);
     //-- Buffers--//
     glBindBuffer(GL_ARRAY_BUFFER, id_vertex);
     glVertexPointer(3, GL_FLOAT, 0, NULL);
 
+	//glBindBuffer(GL_ARRAY_BUFFER, id_tex);
+	//abans
 	glBindBuffer(GL_ARRAY_BUFFER, textureID);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 	
+	//glBindTexture(GL_TEXTURE_2D, id_tex);
+	//abans
 	glBindTexture(GL_TEXTURE_2D, textureID);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_index);
 
