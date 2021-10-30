@@ -36,7 +36,7 @@ public:
 
 	void OnResize(int width, int height);
 
-	void drawCubeDirectMode();
+	//void drawCubeDirectMode();
 	void drawCubeVertexArray();
 	void drawCubeIndex();
 	void drawCircle();

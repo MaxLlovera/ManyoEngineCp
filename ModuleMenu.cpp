@@ -4,6 +4,9 @@
 #include "Primitive.h"
 #include "Console.h"
 #include <Windows.h>
+#include "Cube.h"
+#include "Sphere.h"
+#include "Pyramid.h"
 
 
 ModuleMenu::ModuleMenu(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -68,7 +71,7 @@ update_status ModuleMenu::Update(float dt)
             ImGui::MenuItem("Configuration", NULL, &show_app_main_menu_bar);
             ImGui::MenuItem("Console", NULL, &showConsole);
 			ImGui::MenuItem("Options", NULL, &showOptions);
-            
+			ImGui::MenuItem("Geometry Library", NULL, &showLibrary);
 
             ImGui::EndMenu();
         }
@@ -111,6 +114,24 @@ update_status ModuleMenu::Update(float dt)
 			
 	}
 
+	if (showLibrary)
+	{
+		ImGui::Begin("Geometry Library");
+		//Cube
+		if (ImGui::MenuItem("Cube", NULL, &createCube))		
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Press to create cube");
+		//Sphere
+		if (ImGui::MenuItem("Sphere", NULL, &createSphere))
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Press to create sphere");
+		//Pyramid
+		if (ImGui::MenuItem("Pyramid", NULL, &createPyramid))
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Press to create pyramid");
+
+		ImGui::End();
+	}
     if (show_app_main_menu_bar)
     {
         if (show_demo_window)
@@ -311,6 +332,11 @@ update_status ModuleMenu::Update(float dt)
             ImGui::End();
         }
     }
+
+
+	if (createCube) drawCube();
+	if (createSphere) drawSphere(2, 10, 10);
+	if (createPyramid) drawPyramid();
     
     if (about_us) 
     {

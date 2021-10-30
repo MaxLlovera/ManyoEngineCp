@@ -155,6 +155,7 @@
     <ClInclude Include="assimp\ZipArchiveIOSystem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Console.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="glew\include\eglew.h" />
     <ClInclude Include="glew\include\glew.h" />
     <ClInclude Include="glew\include\glxew.h" />
@@ -262,6 +263,8 @@
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>

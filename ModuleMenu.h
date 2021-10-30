@@ -8,7 +8,7 @@
 #include "SDL/include/SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-
+#include "Primitive.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
@@ -35,9 +35,13 @@ public:
 	bool fullDesktop = false;
 	bool borderless = true;
 
+	bool createCube = false;
+	bool createSphere = false;
+	bool createPyramid = false;
+
 	bool showConsole = false;
 	bool showOptions = false;
-
+	bool showLibrary = false;
 	//enable/disable
 	bool depthTest = true;
 	bool cullFace = true;
@@ -61,6 +65,7 @@ public:
 	bool CleanUp() override;
 
 	//Console c;
+	Cube* cube;
 
 public:
 };

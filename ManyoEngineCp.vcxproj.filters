@@ -55,6 +55,9 @@
     <Filter Include="Sources\Tools\assimp">
       <UniqueIdentifier>{ab5d7d52-8e85-423e-912b-d67fe7784c10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Containers\Library">
+      <UniqueIdentifier>{b0373f14-b16c-4d6b-b3af-9512ad649049}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -611,6 +614,15 @@
     </ClInclude>
     <ClInclude Include="DragDrop.h">
       <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Sources\Containers\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Sources\Containers\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>Sources\Containers\Library</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
