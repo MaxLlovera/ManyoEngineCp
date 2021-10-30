@@ -12,6 +12,7 @@
 #include "assimp/cimport.h"
 #include "assimp/scene.h"
 #include "assimp/postprocess.h"
+#include "assimp/mesh.h"
 
 #define CHECKERS_HEIGHT 256/4
 #define CHECKERS_WIDTH  256/4
@@ -64,6 +65,33 @@ update_status ModuleFbx::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
+//void ModuleFbx::LoadTex(const char* path, const aiScene* scene)
+//{
+	// Check if scene has textures.
+	//if (scene->HasTextures())
+	//{
+	//	textureIds = new GLuint[scene->mNumTextures];
+	//	glGenTextures(scene->mNumTextures, textureIds);// generate GL-textures ID's
+	//	// upload textures
+	//	for (size_t ti = 0; ti < scene->mNumTextures; ti++)
+	//	{
+	//		glBindTexture(GL_TEXTURE_2D, textureIds[ti]);// Binding of texture name
+	//		//
+	//		//redefine standard texture values
+	//		//
+	//		// We will use linear interpolation for magnification filter
+	//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//		// tiling mode
+	//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, (scene->mTextures[ti]->achFormatHint[0] & 0x01) ? GL_REPEAT : GL_CLAMP);
+	//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (scene->mTextures[ti]->achFormatHint[0] & 0x01) ? GL_REPEAT : GL_CLAMP);
+	//		// Texture specification
+	//		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, scene->mTextures[ti]->mWidth, scene->mTextures[ti]->mHeight, 0, GL_BGRA, GL_UNSIGNED_BYTE,
+	//			scene->mTextures[ti]->pcData);
+	//	}
+	//}
+//}
+
 void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
 {
 
@@ -89,6 +117,8 @@ void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
         {
 			Vertex& _v = v[i];
             aiMesh* sceneM = scene->mMeshes[i];
+			
+			//aiVector3D* texM;
 
 			// copy vertices
             _v.num_vertex = sceneM->mNumVertices;
@@ -101,18 +131,59 @@ void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
             {
                 _v.num_index = sceneM->mNumFaces * 3;
                 _v.index = new uint[_v.num_index]; // assume each face is a triangle
-                for (uint i = 0; i < sceneM->mNumFaces; ++i)
+                for (uint j = 0; j < sceneM->mNumFaces; ++j)
                 {
-                    if (sceneM->mFaces[i].mNumIndices != 3)
+                    if (sceneM->mFaces[j].mNumIndices != 3)
                     {
                         LOG("WARNING, geometry face with != 3 indices!");
+
+
                     }
                     else 
                     {
-                        memcpy(&_v.index[i * 3], sceneM->mFaces[i].mIndices, 3 * sizeof(uint));
+                        memcpy(&_v.index[j * 3], sceneM->mFaces[j].mIndices, 3 * sizeof(uint));
+					//	//copy textures
+					//	if (sceneM->HasTextureCoords(0))
+					//	{
+					//		glTexCoord2f(sceneM->mTextureCoords[0][i * 3 + j].x, 1 - sceneM->mTextureCoords[0][i * 3 + j].y);
+					//	}
                     }
+					//glVertex3fv(&sceneM->mVertices[_v.num_index].x);
+
+
                 }
             }
+			
+				_v.textureIds = new GLuint[scene->mNumTextures];
+				glGenTextures(scene->mNumTextures, _v.textureIds);// generate GL-textures ID's
+				// upload textures
+				//for (size_t ti = 0; ti < scene->mNumTextures; ti++)
+				//{
+				//	glBindTexture(GL_TEXTURE_2D, _v.textureIds[ti]);// Binding of texture name
+				//	//
+				//	//redefine standard texture values
+				//	//
+				//	// We will use linear interpolation for magnification filter
+				//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+				//	// tiling mode
+				//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, (scene->mTextures[ti]->achFormatHint[0] & 0x01) ? GL_REPEAT : GL_CLAMP);
+				//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (scene->mTextures[ti]->achFormatHint[0] & 0x01) ? GL_REPEAT : GL_CLAMP);
+				//	// Texture specification
+				//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, scene->mTextures[ti]->mWidth, scene->mTextures[ti]->mHeight, 0, GL_BGRA, GL_UNSIGNED_BYTE,
+				//		scene->mTextures[ti]->pcData);
+				//}
+			
+			/*LoadTex(path, scene);*/
+			/*if (sceneM->HasTextureCoords(i))
+			{
+				_v.texCoords = new float[_v.num_index * 3];
+				memcpy(_v.texCoords, sceneM->mTextureCoords, sizeof(float) * _v.num_index * 3);
+				//_v.texCoords = sceneM->mTextureCoords;
+			}*/
+
+
+
             //Vertex _v = v;
             _v.CreateBuffer();
 			_v.CreateBufferTex(checkerImage);
@@ -123,6 +194,10 @@ void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
         LOG("Error loading scene %s", "Assets/warrior.fbx");
 
 }
+
+
+
+
 
 void Vertex::CreateBuffer()
 {

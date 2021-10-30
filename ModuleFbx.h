@@ -17,10 +17,14 @@ struct Vertex {
 	uint id_tex = 0;
 	uint textureID = 0;
 	uint num_tex = 0;
+	float* texCoords = nullptr;
+	GLuint* textureIds = NULL;
 
 	float* vertex = nullptr;
 	float* tex = nullptr;
 	
+
+
 	void CreateBuffer();
 	void CreateBufferTex(const void* checkerImage);
 	void DrawFbx();
@@ -39,12 +43,13 @@ public:
 	update_status PostUpdate(float dt) override;
 	bool CleanUp() override;
 	void Load(const char* path, std:: vector<Vertex> &v);
+	//void LoadTex(const char* path, const aiScene* scene);
 	
 	//void CreateBuffer(Vertex &data);
 	//void DrawFbx(Vertex &data);
 
 	//int num_meshes = 0;
 
-private:
-
+public:
+	
 };
