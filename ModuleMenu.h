@@ -48,6 +48,10 @@ public:
 	bool lighting = true;
 	bool colorMaterial = true;
 	bool texture2D = true;
+	bool wireframe = false;
+
+	//bool wireframeOn = false;
+
 	//two more
 
 	char name[32];
@@ -63,6 +67,7 @@ public:
 	bool Start() override;
 	update_status Update(float dt) override;
 	bool CleanUp() override;
+	void SetWireFrameMode(bool wireframe);
 
 	//Console c;
 	Cube* cube;

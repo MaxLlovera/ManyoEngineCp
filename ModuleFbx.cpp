@@ -33,7 +33,6 @@ bool ModuleFbx::Init()
 	bool ret = true;
 
 
-
 	return ret;
 }
 

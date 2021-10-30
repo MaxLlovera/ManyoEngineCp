@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
-
+#include "Application.h"
 #include <vector>
 struct Vertex {
 	uint id_index = 0; // index in VRAM

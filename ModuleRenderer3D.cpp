@@ -177,9 +177,22 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::Update(float dt)
 {
 	//drawCube();
-	for (int i = 0; i < v.size(); ++i)
+	if (App->menu->wireframe)
 	{
-		v[i].DrawFbx();
+		glPolygonMode(GL_FRONT, GL_LINE);
+		glPolygonMode(GL_BACK, GL_LINE);
+		for (int i = 0; i < v.size(); ++i)
+		{
+			v[i].DrawFbx();
+		}
+	}
+	else {
+		glPolygonMode(GL_FRONT, GL_FILL);
+		glPolygonMode(GL_BACK, GL_FILL);
+		for (int i = 0; i < v.size(); ++i)
+		{
+			v[i].DrawFbx();
+		}
 	}
 	return UPDATE_CONTINUE;
 

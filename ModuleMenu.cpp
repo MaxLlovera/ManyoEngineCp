@@ -96,6 +96,8 @@ update_status ModuleMenu::Update(float dt)
 
 	if (showOptions)
 	{
+
+
 		if (ImGui::Checkbox("GL_DEPTH_TEST", &depthTest))
 			glDisable(GL_DEPTH_TEST);
 
@@ -111,11 +113,15 @@ update_status ModuleMenu::Update(float dt)
 		if (ImGui::Checkbox("GL_TEXTURE_2D", &texture2D))
 			glDisable(GL_TEXTURE_2D);
 
-			
+		if (ImGui::Checkbox("Wireframe Mode", &wireframe))
+			SetWireFrameMode(wireframe);
+		//else
+		//	wireframeOff = true;
 	}
 
 	if (showLibrary)
 	{
+
 		ImGui::Begin("Geometry Library");
 		//Cube
 		if (ImGui::MenuItem("Cube", NULL, &createCube))		
@@ -333,10 +339,54 @@ update_status ModuleMenu::Update(float dt)
         }
     }
 
+	//DRAW CUBE
+	if (createCube) 
+	{
+		if (wireframe) 
+		{
+			glPolygonMode(GL_FRONT, GL_LINE);
+			glPolygonMode(GL_BACK, GL_LINE);
 
-	if (createCube) drawCube();
-	if (createSphere) drawSphere(2, 10, 10);
-	if (createPyramid) drawPyramid();
+			drawCube();
+		}
+		else {
+			glPolygonMode(GL_FRONT, GL_FILL);
+			glPolygonMode(GL_BACK, GL_FILL);
+			drawCube();
+		}
+	}
+	//DRAW SPHERE
+	if (createSphere) 
+	{
+		if (wireframe)
+		{
+			glPolygonMode(GL_FRONT, GL_LINE);
+			glPolygonMode(GL_BACK, GL_LINE);
+			drawSphere(1, 10, 10);
+		}
+		else {
+			glPolygonMode(GL_FRONT, GL_FILL);
+			glPolygonMode(GL_BACK, GL_FILL);
+			drawSphere(1, 20, 20);
+		}
+	}
+
+	//DRAW PYRAMID
+	if (createPyramid) 
+	{
+		if (wireframe)
+		{
+			glPolygonMode(GL_FRONT, GL_LINE);
+			glPolygonMode(GL_BACK, GL_LINE);
+			drawPyramid();
+		}
+		else {
+			glPolygonMode(GL_FRONT, GL_FILL);
+			glPolygonMode(GL_BACK, GL_FILL);
+			drawPyramid();
+		}
+	}
+
     
     if (about_us) 
     {
@@ -385,3 +435,17 @@ update_status ModuleMenu::Update(float dt)
 }
 
 
+void ModuleMenu::SetWireFrameMode(bool wireframe)
+{
+	if (wireframe)
+	{
+		glPolygonMode(GL_FRONT, GL_FILL);
+		glPolygonMode(GL_BACK, GL_FILL);
+
+	}
+	else 
+	{
+		glPolygonMode(GL_FRONT, GL_LINE);
+		glPolygonMode(GL_BACK, GL_LINE);
+	}
+}
