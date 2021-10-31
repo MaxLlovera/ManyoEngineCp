@@ -9,7 +9,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include <gl/GL.h>
 #include "ModuleFbx.h"
-
+#include "GameObject.h"
 //struct Vertex {
 //	uint id_index = 0; // index in VRAM
 //	uint num_index = 0;
@@ -34,6 +34,9 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
+	GameObject* CreateGameObject();
+
+	GameObject* Root();
 private:
 	//Vertex v;
 

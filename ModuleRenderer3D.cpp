@@ -179,6 +179,11 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::Update(float dt)
 {
 	//drawCube();
+	if (App->input->droped)
+	{
+		App->m_fbx->Load(App->input->dropped_filedir, v);
+		App->input->droped = false;
+	}
 	if (App->menu->wireframe)
 	{
 		glPolygonMode(GL_FRONT, GL_LINE);
@@ -196,11 +201,7 @@ update_status ModuleRenderer3D::Update(float dt)
 			v[i].DrawFbx();
 		}
 	}
-	if (App->input->droped)
-	{
-		App->m_fbx->Load(App->input->dropped_filedir, v);
-		App->input->droped = false;
-	}
+
 
 	return UPDATE_CONTINUE;
 

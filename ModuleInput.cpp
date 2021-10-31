@@ -130,12 +130,14 @@ update_status ModuleInput::PreUpdate(float dt)
 				dropped_filedir = e.drop.file;
 				droped = true;
 				// Shows directory of dropped file
+				//App->m_fbx->Load(App->input->dropped_filedir, App->renderer3D->v);
 				SDL_ShowSimpleMessageBox(
 					SDL_MESSAGEBOX_INFORMATION,
 					"File dropped on window",
 					dropped_filedir,
 					App->window->window
 				);
+				
 				SDL_free(dropped_filedir);    // Free dropped_filedir memory
 				break;
 

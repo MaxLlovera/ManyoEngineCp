@@ -249,6 +249,8 @@ void Vertex::CreateBufferTex(const void *checkerImage)
 
 void Vertex::DrawFbx()
 {
+	/*glPushMatrix();
+	glMultMatrixf(my_global_transformation_matrix);*/
 
     glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -279,6 +281,8 @@ void Vertex::DrawFbx()
     //--Disables States--//
     glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	//glPopMatrix();
 }
 
 // Called before quitting
