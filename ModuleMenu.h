@@ -38,6 +38,7 @@ public:
 	bool createCube = false;
 	bool createSphere = false;
 	bool createPyramid = false;
+	bool createCylinder = false;
 
 	bool showConsole = false;
 	bool showOptions = false;

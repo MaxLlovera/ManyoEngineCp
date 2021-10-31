@@ -7,10 +7,12 @@
 #include "Cube.h"
 #include "Sphere.h"
 #include "Pyramid.h"
-
+#include "Cylinder.h"
 
 ModuleMenu::ModuleMenu(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+
+
 }
 
 ModuleMenu::~ModuleMenu()
@@ -33,6 +35,14 @@ bool ModuleMenu::Start()
 	ImGui_ImplOpenGL3_Init();
 
 
+
+	//// can change parameters later
+	//cylinder.setBaseRadius(1.0f);
+	//cylinder.setTopRadius(1.0f);
+	//cylinder.setHeight(2.0f);
+	//cylinder.setSectorCount(50);
+	//cylinder.setStackCount(16);
+	//cylinder.setSmooth(false);
 
 	return ret;
 }
@@ -135,6 +145,10 @@ update_status ModuleMenu::Update(float dt)
 		if (ImGui::MenuItem("Pyramid", NULL, &createPyramid))
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("Press to create pyramid");
+
+		if (ImGui::MenuItem("Cylinder", NULL, &createCylinder))
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Press to create cylinder");
 
 		ImGui::End();
 	}
@@ -347,11 +361,13 @@ update_status ModuleMenu::Update(float dt)
 			glPolygonMode(GL_FRONT, GL_LINE);
 			glPolygonMode(GL_BACK, GL_LINE);
 
+			
 			drawCube();
 		}
 		else {
 			glPolygonMode(GL_FRONT, GL_FILL);
 			glPolygonMode(GL_BACK, GL_FILL);
+
 			drawCube();
 		}
 	}
@@ -387,6 +403,22 @@ update_status ModuleMenu::Update(float dt)
 		}
 	}
 
+	if (createCylinder)
+	{
+		if (wireframe)
+		{
+			glPolygonMode(GL_FRONT, GL_LINE);
+			glPolygonMode(GL_BACK, GL_LINE);
+			Cylinder cylinder(1, 1, 3,20, 10, true);
+			cylinder.drawCylinder();
+		}
+		else {
+			glPolygonMode(GL_FRONT, GL_FILL);
+			glPolygonMode(GL_BACK, GL_FILL);
+			Cylinder cylinder(1, 1, 3, 20, 10, true);
+			cylinder.drawCylinder();
+		}
+	}
     
     if (about_us) 
     {
@@ -414,7 +446,6 @@ update_status ModuleMenu::Update(float dt)
             ImGui::TextWrapped("Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files(the Software), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and /or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions :\n");
             ImGui::TextWrapped("The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n");
             ImGui::TextWrapped("THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n");
-  
         }
         ImGui::End();
     }
