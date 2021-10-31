@@ -97,21 +97,21 @@ update_status ModuleMenu::Update(float dt)
 	if (showOptions)
 	{
 
-
+		
 		if (ImGui::Checkbox("GL_DEPTH_TEST", &depthTest))
-			glDisable(GL_DEPTH_TEST);
+			SetDepthTest(depthTest);
 
 		if (ImGui::Checkbox("GL_CULL_FACE", &cullFace))
-			glDisable(GL_CULL_FACE);
+			SetCullFace(cullFace);
 
 		if (ImGui::Checkbox("GL_LIGHTING", &lighting))
-			glDisable(GL_LIGHTING);
+			SetLighting(lighting);
 
 		if (ImGui::Checkbox("GL_COLOR_MATERIAL", &colorMaterial))
-			glDisable(GL_COLOR_MATERIAL);
+			SetColorMaterial(colorMaterial);
 
 		if (ImGui::Checkbox("GL_TEXTURE_2D", &texture2D))
-			glDisable(GL_TEXTURE_2D);
+			SetTexture2D(texture2D);
 
 		if (ImGui::Checkbox("Wireframe Mode", &wireframe))
 			SetWireFrameMode(wireframe);
@@ -447,5 +447,65 @@ void ModuleMenu::SetWireFrameMode(bool wireframe)
 	{
 		glPolygonMode(GL_FRONT, GL_LINE);
 		glPolygonMode(GL_BACK, GL_LINE);
+	}
+}
+
+void ModuleMenu::SetDepthTest(bool depthTest)
+{
+	if (depthTest)
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+	else
+	{
+		glDisable(GL_DEPTH_TEST);
+	}
+}
+
+void ModuleMenu::SetCullFace(bool cullFace)
+{
+	if (cullFace)
+	{
+		glEnable(GL_CULL_FACE);
+	}
+	else
+	{
+		glDisable(GL_CULL_FACE);
+	}
+}
+
+void ModuleMenu::SetLighting(bool lighting)
+{
+	if (lighting)
+	{
+		glEnable(GL_LIGHTING);
+	}
+	else
+	{
+		glDisable(GL_LIGHTING);
+	}
+}
+
+void ModuleMenu::SetColorMaterial(bool colorMaterial)
+{
+	if (colorMaterial)
+	{
+		glEnable(GL_COLOR_MATERIAL);
+	}
+	else
+	{
+		glDisable(GL_COLOR_MATERIAL);
+	}
+}
+
+void ModuleMenu::SetTexture2D(bool texture2D)
+{
+	if (texture2D)
+	{
+		glEnable(GL_TEXTURE_2D);
+	}
+	else
+	{
+		glDisable(GL_TEXTURE_2D);
 	}
 }

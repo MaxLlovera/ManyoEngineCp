@@ -624,6 +624,9 @@
     <ClInclude Include="Pyramid.h">
       <Filter>Sources\Containers\Library</Filter>
     </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Sources\Containers\Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">

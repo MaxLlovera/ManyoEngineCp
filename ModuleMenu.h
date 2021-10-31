@@ -68,6 +68,11 @@ public:
 	update_status Update(float dt) override;
 	bool CleanUp() override;
 	void SetWireFrameMode(bool wireframe);
+	void SetDepthTest(bool depthTest);
+	void SetCullFace(bool cullFace);
+	void SetLighting(bool lighting);
+	void SetColorMaterial(bool colorMaterial);
+	void SetTexture2D(bool texture2D);
 
 	//Console c;
 	Cube* cube;
