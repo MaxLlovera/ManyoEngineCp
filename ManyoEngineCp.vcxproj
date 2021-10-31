@@ -68,6 +68,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ProjectDir)\assimp\include;$(ProjectDir)\DevIL\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -75,6 +76,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalLibraryDirectories>$(ProjectDir)assimp\lib;$(ProjectDir)glew\lib;$(ProjectDir)DevIL\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc142-mt.lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

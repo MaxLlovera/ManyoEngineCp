@@ -140,27 +140,31 @@ void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
                     }
                     else 
                     {
+
+
                         memcpy(&_v.index[j * 3], sceneM->mFaces[j].mIndices, 3 * sizeof(uint));
-					//	//copy textures
-					//	if (sceneM->HasTextureCoords(0))
-					//	{
-					//		glTexCoord2f(sceneM->mTextureCoords[0][i * 3 + j].x, 1 - sceneM->mTextureCoords[0][i * 3 + j].y);
-					//	}
+						//copy textures
+						//if (sceneM->HasTextureCoords(0))
+						//{
+						//	//glTexCoord2f(sceneM->mTextureCoords[0][i * 3 + j].x, 1 - sceneM->mTextureCoords[0][i * 3 + j].y);
+						//	_v.texCoords
+						//}
                     }
 					//glVertex3fv(&sceneM->mVertices[_v.num_index].x);
 
+											// copy tex coords
+					_v.texCoords = new float[_v.num_vertex * 2];
+					for (size_t k = 0; k < sceneM->mNumVertices; k++) {
+						if (sceneM->mTextureCoords[0]) {
+							_v.texCoords[k * 2] = sceneM->mTextureCoords[0][k].x;
+							_v.texCoords[k * 2 + 1] = sceneM->mTextureCoords[0][k].y;
+						}
+					}
 
                 }
             }
 
-			// copy tex coords
-			_v.texCoords = new float[_v.num_vertex * 2];
-			for (size_t k = 0; k < sceneM->mNumVertices; k++) {
-				if (sceneM->mTextureCoords[0]) {
-					_v.texCoords[k * 2] = sceneM->mTextureCoords[0][k].x;
-					_v.texCoords[k * 2 + 1] = sceneM->mTextureCoords[0][k].y;
-				}
-			}
+
 			
 				//_v.textureIds = new GLuint[scene->mNumTextures];
 				//glGenTextures(scene->mNumTextures, _v.textureIds);// generate GL-textures ID's
@@ -191,6 +195,7 @@ void ModuleFbx::Load(const char* path, std::vector<Vertex>& v)
 			}*/
 
             //Vertex _v = v;
+			
             _v.CreateBuffer();
 			_v.CreateBufferTex(checkerImage);
         }
