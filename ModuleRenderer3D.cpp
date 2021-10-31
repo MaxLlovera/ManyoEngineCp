@@ -6,6 +6,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "ModuleFbx.h"
+#include "ModuleInput.h"
 
 #include <vector>
 #include <cmath>
@@ -81,6 +82,7 @@ bool ModuleRenderer3D::Init()
 	glEnable(GL_TEXTURE_2D);
 
 	App->m_fbx->Load("Assets/BakerHouse.fbx", v);
+
 
 	if(ret == true)
 	{
@@ -194,6 +196,12 @@ update_status ModuleRenderer3D::Update(float dt)
 			v[i].DrawFbx();
 		}
 	}
+	if (App->input->droped)
+	{
+		App->m_fbx->Load(App->input->dropped_filedir, v);
+		App->input->droped = false;
+	}
+
 	return UPDATE_CONTINUE;
 
 }

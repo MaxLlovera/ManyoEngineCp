@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
 
 #define MAX_KEYS 300
 
@@ -57,8 +58,18 @@ update_status ModuleInput::PreUpdate(float dt)
 		}
 	}
 
-	Uint32 buttons = SDL_GetMouseState(&mouse_x, &mouse_y);
+	//App->window->window = SDL_CreateWindow(  // Create a window
+	//	"SDL_DropEvent usage, please drop the file on window",
+	//	SDL_WINDOWPOS_CENTERED,
+	//	SDL_WINDOWPOS_CENTERED,
+	//	640,
+	//	480,
+	//	SDL_WINDOW_OPENGL
+	//);
 
+
+	Uint32 buttons = SDL_GetMouseState(&mouse_x, &mouse_y);
+	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 	mouse_x /= SCREEN_SIZE;
 	mouse_y /= SCREEN_SIZE;
 	mouse_z = 0;
@@ -85,6 +96,7 @@ update_status ModuleInput::PreUpdate(float dt)
 
 	bool quit = false;
 	SDL_Event e;
+	
 	while(SDL_PollEvent(&e))
 	{
 		switch(e.type)
@@ -106,6 +118,27 @@ update_status ModuleInput::PreUpdate(float dt)
 			quit = true;
 			break;
 
+			case (SDL_DROPFILE):
+				//App->window->window = SDL_CreateWindow(  // Create a window
+				//	"SDL_DropEvent usage, please drop the file on window",
+				//	SDL_WINDOWPOS_CENTERED,
+				//	SDL_WINDOWPOS_CENTERED,
+				//	640,
+				//	480,
+				//	SDL_WINDOW_OPENGL
+				//);
+				dropped_filedir = e.drop.file;
+				droped = true;
+				// Shows directory of dropped file
+				SDL_ShowSimpleMessageBox(
+					SDL_MESSAGEBOX_INFORMATION,
+					"File dropped on window",
+					dropped_filedir,
+					App->window->window
+				);
+				SDL_free(dropped_filedir);    // Free dropped_filedir memory
+				break;
+
 			case SDL_WINDOWEVENT:
 			{
 				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
@@ -113,9 +146,11 @@ update_status ModuleInput::PreUpdate(float dt)
 			}
 		}
 	}
-
+	SDL_Delay(0);
 	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return UPDATE_STOP;
+
+
 
 	return UPDATE_CONTINUE;
 }
