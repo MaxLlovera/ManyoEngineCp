@@ -153,6 +153,15 @@ void ModuleWindow::SetBorderless(bool borderless)
 		SDL_SetWindowBordered(window, SDL_FALSE);
 
 }
+void ModuleWindow::SetVsync(bool vsync)
+{
+	//if (vsync)
+		
+	//else
+		
+}
+
+
 
 //int ModuleWindow::GetRefreshRate()
 //{

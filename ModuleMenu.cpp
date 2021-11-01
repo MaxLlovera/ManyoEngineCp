@@ -73,6 +73,10 @@ update_status ModuleMenu::Update(float dt)
     {
         if (ImGui::BeginMenu("File"))
         {
+			if (ImGui::MenuItem("Close Engine"))
+				return UPDATE_STOP;
+
+			
             //ShowExampleMenuFile();
             ImGui::EndMenu();
         }
@@ -92,8 +96,7 @@ update_status ModuleMenu::Update(float dt)
             ImGui::MenuItem("About ImGui", NULL, &show_app_about);
             ImGui::EndMenu();
         }
-        if (ImGui::BeginMenu("Close Engine"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-            return UPDATE_STOP;
+
         ImGui::EndMainMenuBar();
     }
 
@@ -106,8 +109,7 @@ update_status ModuleMenu::Update(float dt)
 
 	if (showOptions)
 	{
-
-		
+		ImGui::Begin("Options");
 		if (ImGui::Checkbox("GL_DEPTH_TEST", &depthTest))
 			SetDepthTest(depthTest);
 
@@ -126,7 +128,12 @@ update_status ModuleMenu::Update(float dt)
 		if (ImGui::Checkbox("Wireframe Mode", &wireframe))
 			SetWireFrameMode(wireframe);
 		//else
-		//	wireframeOff = true;
+		//wireframeOff = true;
+
+		//vsync
+		ImGui::Checkbox("Vsync", &vsync);
+			//SetVsync(vsync);
+		ImGui::End();
 	}
 
 	if (showLibrary)
@@ -262,8 +269,24 @@ update_status ModuleMenu::Update(float dt)
         }
         if (ImGui::CollapsingHeader("Input"))
         {
+			static int volume;
+			ImGui::Text("Volume:");
+			ImGui::SameLine();
+			if (ImGui::SliderInt("", &volume, 0, 100)) {}
 
+			ImGui::Text("Mouse position X:");
+			ImGui::SameLine();
+			ImGui::TextColored(color_mouse, "%d", App->input->GetMouseX());	
+			
+			ImGui::Text("Mouse position Y:");
+			ImGui::SameLine();
+			ImGui::TextColored(color_mouse, "%d", App->input->GetMouseY());
+			
+			ImGui::Text("Mouse position Z:");
+			ImGui::SameLine();
+			ImGui::TextColored(color_mouse, "%d", App->input->GetMouseZ());
         }
+
         if (ImGui::CollapsingHeader("Hardware"))
         {
 			if (ImGui::Checkbox("Active", &active)) {}
@@ -438,6 +461,18 @@ update_status ModuleMenu::Update(float dt)
 			ImGui::SameLine();
 			if (ImGui::SmallButton("Arnau Ustrell"))
 				ShellExecuteA(NULL, "open", "https://github.com/arnauustrell", NULL, NULL, SW_SHOWDEFAULT);
+
+			ImGui::TextWrapped("3rd Party libraries used:\n");
+			ImGui::TextWrapped("· SDL 2.0 \n");
+			ImGui::TextWrapped("· MathGeoLib 1.5 \n");
+			ImGui::TextWrapped("· Glew 2.2.0 \n");
+			ImGui::TextWrapped("· ImGui 1.84 \n");
+			ImGui::TextWrapped("· OpenGL 3.1 \n");
+			ImGui::TextWrapped("· DevIL 1.8.0 \n");
+			ImGui::TextWrapped("· Assimp 5.0 \n");
+			ImGui::TextWrapped("· Json Parson 1.2 \n");
+			
+
 
 			//ManyoEngineCp \nThe next Generation 3d Engine \nBy Max Llovera & Arnau Ustrell\n");
             ImGui::TextWrapped("License:\n");

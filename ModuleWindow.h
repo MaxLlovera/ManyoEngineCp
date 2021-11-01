@@ -26,6 +26,7 @@ public:
 	void SetWindowSize(int width, int height);
 	void SetFullDesktop(bool &fullDesktop);
 	void SetBorderless(bool borderless);
+	void SetVsync(bool vsync);
 
 	void GetWindowSize(int &width, int &height);
 	//int GetRefreshRate();

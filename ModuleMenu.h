@@ -50,6 +50,7 @@ public:
 	bool colorMaterial = true;
 	bool texture2D = true;
 	bool wireframe = false;
+	bool vsync = false;
 
 	//bool wireframeOn = false;
 
@@ -64,6 +65,7 @@ public:
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	ImVec4 color_hardware = ImVec4(1.0f, 1.0f, 0.0f, 1.00f);
+	ImVec4 color_mouse = ImVec4(0.0f, 1.0f, 0.0f, 1.00f);
 
 	bool Start() override;
 	update_status Update(float dt) override;
