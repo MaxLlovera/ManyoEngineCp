@@ -463,14 +463,14 @@ update_status ModuleMenu::Update(float dt)
 				ShellExecuteA(NULL, "open", "https://github.com/arnauustrell", NULL, NULL, SW_SHOWDEFAULT);
 
 			ImGui::TextWrapped("3rd Party libraries used:\n");
-			ImGui::TextWrapped("· SDL 2.0 \n");
-			ImGui::TextWrapped("· MathGeoLib 1.5 \n");
-			ImGui::TextWrapped("· Glew 2.2.0 \n");
-			ImGui::TextWrapped("· ImGui 1.84 \n");
-			ImGui::TextWrapped("· OpenGL 3.1 \n");
-			ImGui::TextWrapped("· DevIL 1.8.0 \n");
-			ImGui::TextWrapped("· Assimp 5.0 \n");
-			ImGui::TextWrapped("· Json Parson 1.2 \n");
+			ImGui::TextWrapped("- SDL 2.0 \n");
+			ImGui::TextWrapped("- MathGeoLib 1.5 \n");
+			ImGui::TextWrapped("- Glew 2.2.0 \n");
+			ImGui::TextWrapped("- ImGui 1.84 \n");
+			ImGui::TextWrapped("- OpenGL 3.1 \n");
+			ImGui::TextWrapped("- DevIL 1.8.0 \n");
+			ImGui::TextWrapped("- Assimp 5.0 \n");
+			ImGui::TextWrapped("- Json Parson 1.2 \n");
 			
 
 

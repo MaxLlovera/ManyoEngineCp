@@ -54,4 +54,5 @@ public:
 	uint my_id = 0;
 
 	std::vector<Vertex> v;
+
 };
