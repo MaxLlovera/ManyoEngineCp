@@ -43,6 +43,7 @@ public:
 	bool showConsole = false;
 	bool showOptions = false;
 	bool showLibrary = false;
+	bool showHierarchy = true;
 	//enable/disable
 	bool depthTest = true;
 	bool cullFace = true;

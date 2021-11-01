@@ -86,6 +86,7 @@ update_status ModuleMenu::Update(float dt)
             ImGui::MenuItem("Console", NULL, &showConsole);
 			ImGui::MenuItem("Options", NULL, &showOptions);
 			ImGui::MenuItem("Geometry Library", NULL, &showLibrary);
+			ImGui::MenuItem("Hierarchy", NULL, &showHierarchy);
 
             ImGui::EndMenu();
         }
@@ -106,6 +107,15 @@ update_status ModuleMenu::Update(float dt)
 		static Console console;
 		console.Draw("Console", &showConsole);
 	}
+
+	if (showHierarchy)
+	{
+		ImGui::Begin("Hierarchy");
+
+
+		ImGui::End();
+	}
+
 
 	if (showOptions)
 	{
